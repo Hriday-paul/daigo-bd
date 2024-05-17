@@ -2,12 +2,17 @@ import type { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
 
 export const AuthOptions: NextAuthOptions = {
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_ID || '',
             clientSecret: process.env.GOOGLE_SECRET || '',
+        }),
+        FacebookProvider({
+            clientId: process.env.FACEBOOK_ID || '',
+            clientSecret: process.env.FACEBOOK_SECRET || '',
         }),
         CredentialsProvider({
             name: "Credentials",
@@ -16,16 +21,11 @@ export const AuthOptions: NextAuthOptions = {
                 password: { label: "Password", type: "password" },
             },
             async authorize(credentials) {
-                try {
-                    const { email, password } = credentials || {};
-                    // post data is server
-                    // const loginResponse = await axios.post(process.env.NEXT_PUBLIC_SERVER_URL + '/login', { email, password });
-                    //return loginResponse.data.user;
-                    return '/'
-                } catch (err) {
-                    return false;
-                }
-            },
+                const { email, password } = credentials as any;
+                const user = { id: "", email, password };
+                if (!user || !user.password) return null;
+                return user
+            }
         }),
     ],
     callbacks: {
