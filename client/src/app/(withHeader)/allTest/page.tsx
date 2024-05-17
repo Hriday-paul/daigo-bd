@@ -2,8 +2,8 @@ import React from 'react';
 
 const AllTest = () => {
     return (
-        <div>
-            Thiis is all test page.
+        <div className='mt-40'>
+            This is a register page.
         </div>
     );
 };
