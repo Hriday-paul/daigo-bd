@@ -28,6 +28,10 @@ export const AuthOptions: NextAuthOptions = {
             }
         }),
     ],
+    secret: process.env.NEXT_SECRET,
+    jwt: {
+        secret: process.env.JWT_SECRET,
+    },
     callbacks: {
         async signIn({ user, account }: any) {
             try {
