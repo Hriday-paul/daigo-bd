@@ -14,9 +14,9 @@ export default function Home() {
 
         <HomeServices />
 
-        <HomeBanner />
+        {/* <HomeBanner /> */}
 
-        {/* <HomeDoctors /> */}
+        <HomeDoctors />
         
     </main>
   );
