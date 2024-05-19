@@ -6,7 +6,7 @@ const DoctorCard = () => {
     return (
         <div className="border border-gray-800 group bg-[#0C0D0B]">
             <div className="relative ">
-                <Image src="https://demo2.themewarrior.com/hospitalplus/wp-content/uploads/sites/22/2016/04/veronica-400x400.jpg" height={200} width={200} className="h-auto md:h-44 w-full mb-3 group-hover:brightness-75" alt="doctor-photo" />
+                <Image src="https://demo2.themewarrior.com/hospitalplus/wp-content/uploads/sites/22/2016/04/veronica-400x400.jpg" height={200} width={200} className="h-72 md:h-44 w-full mb-3 group-hover:brightness-75" alt="doctor-photo" />
             </div>
             <div className="p-5 pb-0 flex flex-col justify-center relative">
                 <div className="relative mb-7">

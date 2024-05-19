@@ -35,7 +35,7 @@ const HomeSlider = () => {
                 <GrFormNextLink className="text-white text-lg"></GrFormNextLink>
             </button>
 
-            <div className="absolute bottom-0 left-5 lg:left-28 h-[calc(350px-116px)] md:h-[calc(100vh-140px)] lg:h-[calc(100vh-164px)] flex items-center z-10  min-w-full">
+            <div data-aos="fade-left" data-aos-duration="1500" className="absolute bottom-0 left-5 lg:left-28 h-[calc(350px-116px)] md:h-[calc(100vh-140px)] lg:h-[calc(100vh-164px)] flex items-center z-10  min-w-full">
                 <div className="bg-black/60 p-5 md:p-7 lg:p-10 w-[250px] md:w-[400px] lg:w-[500px]">
                     <button className="relative px-2 md:px-3 py-2 md:py-3 mb-3 md:mb-5 lg:mb-7 font-medium text-white transition duration-300 bg-[#008080]  hover:bg-[#1e5e5e] ease">
                         <Link href='/allTest'>

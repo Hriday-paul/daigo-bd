@@ -5,6 +5,7 @@ import NextTopLoader from 'nextjs-toploader';
 import "./globals.css";
 import StoreProvider from "@/StoreProvider";
 import NextAuthSessionProvider from "@/Provider/Sessionprovid";
+import ScrollAnim from "@/components/Ui/ScrollAnim/ScrollAnim";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +26,9 @@ export default function RootLayout({
         <StoreProvider>
           <NextTopLoader color="#0BCABA" initialPosition={0.30} />
           <NextAuthSessionProvider>
-            {children}
+            <ScrollAnim>
+              {children}
+            </ScrollAnim>
           </NextAuthSessionProvider>
         </StoreProvider>
       </body>

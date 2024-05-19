@@ -55,32 +55,31 @@ const Navbar = () => {
 
                 <div className="flex items-center justify-between py-3">
                     <Link href='/' className="flex items-center gap-x-2">
-                        <Image className="h-10 md:h-14 lg:h-20 w-10 md:w-14 lg:w-20" src={logo} alt="logo" />
-                        <h1 className="uppercase text-xl md:text-2xl lg:text-3xl font-bold text-[#00C4CC] font-mono">MediCare</h1>
+                        <Image className="h-10 md:h-14 lg:h-20 w-12 md:w-16 lg:w-24" src={logo} height={200} width={200} alt="logo" />
+                        <h1 className="uppercase text-xl md:text-2xl lg:text-3xl font-bold text-[#00C4CC] font-unbounded">MediCare</h1>
                     </Link>
                     <div className="hidden lg:block">
-                        <ul className="flex gap-x-8">
-                            <li className='text-lg font-medium font-sans relative group'>
+                        <ul className="flex gap-x-5 xl:gap-x-7">
+                            <li className='text-lg font-medium font-unbounded relative group'>
                                 <Link href='/'>Home</Link>
                                 <span className='absolute left-0 -bottom-2 h-0.5 w-0 group-hover:w-full bg-[#00C4CC] duration-200'></span>
                             </li>
-                            <li className='text-lg font-medium font-sans relative group'>
-                                <Link href='/allTest'>All Test</Link>
+                            <li className='text-lg font-medium font-unbounded relative group'>
+                                <Link href='/tests'>All Test</Link>
                                 <span className='absolute left-0 -bottom-2 h-0.5 w-0 group-hover:w-full bg-[#00C4CC] duration-200'></span>
                             </li>
-                            <li className='text-lg font-medium font-sans relative group'>
+                            <li className='text-lg font-medium font-unbounded relative group'>
+                                <Link href='/doctors'>Doctors</Link>
+                                <span className='absolute left-0 -bottom-2 h-0.5 w-0 group-hover:w-full bg-[#00C4CC] duration-200'></span>
+                            </li>
+                            <li className='text-lg font-medium font-unbounded relative group'>
                                 <Link href='/gallery'>Gallery</Link>
                                 <span className='absolute left-0 -bottom-2 h-0.5 w-0 group-hover:w-full bg-[#00C4CC] duration-200'></span>
                             </li>
-                            <li className='text-lg font-medium font-sans relative group'>
-                                <Link href='/register'>Blog</Link>
-                                <span className='absolute left-0 -bottom-2 h-0.5 w-0 group-hover:w-full bg-[#00C4CC] duration-200'></span>
-                            </li>
-                            <li className='text-lg font-medium font-sans relative group'>
+                            <li className='text-lg font-medium font-unbounded relative group'>
                                 <Link href='/contact'>Contact</Link>
                                 <span className='absolute left-0 -bottom-2 h-0.5 w-0 group-hover:w-full bg-[#00C4CC] duration-200'></span>
                             </li>
-
 
                         </ul>
                     </div>
