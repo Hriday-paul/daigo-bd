@@ -2,7 +2,7 @@ import { testType } from "@/app/(withHeader)/tests/page";
 
 const useGetTestDetails = async (id: string): Promise<testType | null> => {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/test/${id}`, { next: { tags: [`details${id}`] } });
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/test/${id}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }

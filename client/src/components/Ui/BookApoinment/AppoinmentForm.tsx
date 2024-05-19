@@ -1,5 +1,7 @@
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form"
+import toast from "react-hot-toast";
 
 type Inputs = {
     name: string;
@@ -8,18 +10,45 @@ type Inputs = {
     blood: string | null;
 }
 
-const AppoinmentForm = ({testId} : {testId : string}) => {
-   const {status, data} =  useSession();
-   console.log(data?.user);
+const AppoinmentForm = ({ testId }: { testId: string }) => {
+    const { status, data } = useSession();
+    const router = useRouter();
 
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm<Inputs>();
 
-    const handleCreat: SubmitHandler<Inputs> = (formData) => {
-        console.log(formData);
+    const handleCreat: SubmitHandler<Inputs> = async (formData) => {
+        const loadingToastId = toast.loading('Test Booking pending...');
+        try {
+            if(status == 'unauthenticated'){
+                router.push('/login');
+            }
+            const date = `${new Date().getFullYear()}-${(new Date().getMonth() + 1)}-${new Date().getDate()}`;
+            const output: any = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/addReservation`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ...formData, bookedDate: date, testId, email: data?.user?.email }),
+            });
+            const response = await output.json();
+            
+            if (response?.upsertedCount >= 1) {
+                toast.success('Test Booked Complete', { id: loadingToastId });
+            }
+            else {
+                toast.error("You already booked, don't try !", { id: loadingToastId })
+            }
+            reset();
+        }
+        catch (err) {
+            console.log(err);
+            toast.error("Error found !", { id: loadingToastId })
+        }
     };
 
 
