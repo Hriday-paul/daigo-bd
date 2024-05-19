@@ -18,6 +18,6 @@ const config: Config = {
       'unbounded': ['Unbounded', 'system-ui'],
     }
   },
-  plugins: [],
+  plugins: [require('daisyui')],
 };
 export default config;

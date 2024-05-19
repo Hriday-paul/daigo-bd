@@ -32,7 +32,22 @@ export const AuthOptions: NextAuthOptions = {
     jwt: {
         secret: process.env.JWT_SECRET,
     },
+    session: {
+        strategy: "jwt",
+    },
     callbacks: {
+        async jwt({ token, user }) {
+            return {
+                ...token,
+                ...user,
+            };
+        },
+        async session({ session, token }) {
+            return {
+                ...session,
+                ...token,
+            };
+        },
         async signIn({ user, account }: any) {
             try {
                 console.log(account);

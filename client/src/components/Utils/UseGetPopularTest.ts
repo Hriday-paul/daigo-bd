@@ -1,10 +1,14 @@
 
 const UseGetPopularTest = async () => {
-    const response = await fetch(process.env.SERVER_URL+'/mostFrequent');
-    if (!response.ok) {
-        throw new Error('All test data fetch faild');
+    try {
+        const response = await fetch(process.env.SERVER_URL+'/mostFrequent',
+            );
+        const res = response.json();
+        return res
+    } catch (err) {
+        console.log(err);
+        throw new Error('fetching error')
     }
-    return response.json();
 };
 
 export default UseGetPopularTest;
