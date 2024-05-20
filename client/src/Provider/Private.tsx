@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 const Private = ({ children }: { children: React.ReactNode }) => {
     const { status, data } = useSession();
+    console.log(data);
     const router = useRouter();
     if (status === 'loading') {
         return <ClientLoading />

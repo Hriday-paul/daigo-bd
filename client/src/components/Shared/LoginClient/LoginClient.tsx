@@ -28,6 +28,7 @@ const LoginClient = () => {
     const handleRegister: SubmitHandler<Inputs> = (data) => {
         setFormLoading(true)
         signIn("credentials", { email: data.email, password: data.password, redirect: false }).then(async ({ ok, error }: any) => {
+            console.log(ok);
             if (ok && !error) {
                 router.push('/');
                 //location.reload();

@@ -9,7 +9,8 @@ import React from 'react';
 
 const dashboardPage = async () => {
     const session = await getServerSession(AuthOptions);
-    const { user } = session || {};
+    console.log('Your session is here',session);
+    const { user } = session as any;
     if (!user) {
         redirect('/login');
     } else if (user.email) {
