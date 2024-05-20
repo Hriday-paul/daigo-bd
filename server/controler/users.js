@@ -9,9 +9,24 @@ const checkIsAdmin = async (req, res) => {
         }
         res.send({ admin });
     } catch (err) {
-        res.status(402).send({ err : err.message })
+        res.status(402).send({ err: err.message })
     }
 }
+
+// add  user
+const creatNewUser = async (req, res) => {
+    try {
+        const filter = { email: req.body.email };
+        const user = await userStore.findOne(filter);
+        if (user) {
+            return res.status(400).send({ msg: 'user alreadt exist !' });
+        }
+        const result = await userStore.collection.insertOne(req.body);
+        res.status(200).send(result)
+    } catch (err) {
+        res.status(400).send({ message: err.message })
+    }
+};
 
 // add or update user
 const addOrUpdateUser = async (req, res) => {
@@ -26,7 +41,24 @@ const addOrUpdateUser = async (req, res) => {
     } catch (err) {
         res.status(400).send({ message: err.message })
     }
-}
+};
+
+const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await userStore.findOne({ email });
+        if (user) {
+            if (user.password !== password) {
+                return res.status(400).send({ message: 'password not match' })
+            }
+            const {name, email, status, photo, role, _id} = user;
+            return res.status(200).send({name, email, status, image : photo, role, _id});
+        }
+        res.status(400).send({ message: 'Account not found' })
+    } catch (err) {
+        res.status(400).send({ message: err.message })
+    }
+};
 
 // get all users
 const allUsers = async (req, res) => {
@@ -45,5 +77,7 @@ const allUsers = async (req, res) => {
 module.exports = {
     checkIsAdmin,
     addOrUpdateUser,
-    allUsers
+    allUsers,
+    creatNewUser,
+    loginUser
 }

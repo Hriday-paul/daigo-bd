@@ -59,7 +59,7 @@ const AppoinMents = () => {
                                 </select>
                             </div>
                             {
-                                Array.isArray(data) && data.length <= 0 ? <EmptyData /> :
+                                data ? (Array.isArray(data) && data.length <= 0) ? <EmptyData /> :
                                     <div>
                                         <div className="overflow-x-auto bg-[#262522] text-gray-300">
                                             <table className="table">
@@ -81,7 +81,7 @@ const AppoinMents = () => {
                                                 <tbody>
 
                                                     {
-                                                        Array.isArray(data) && data.length <= 0 ? <EmptyData /> : data?.map((appoinment) => {
+                                                        data ? Array.isArray(data) && data.length <= 0 ? <EmptyData /> : data?.map((appoinment) => {
                                                             return <tr key={appoinment?._id} className="border-[#494846]">
 
                                                                 <td>
@@ -135,14 +135,13 @@ const AppoinMents = () => {
                                                                     </Tooltip>
                                                                 </td>
                                                             </tr>
-                                                        })
+                                                        }) : <></>
                                                     }
-
 
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </div>
+                                    </div> : <></>
                             }
                         </div>
                 }

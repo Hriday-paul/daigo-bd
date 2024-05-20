@@ -7,12 +7,16 @@ import FacebookProvider from "next-auth/providers/facebook";
 export const AuthOptions: NextAuthOptions = {
     providers: [
         GoogleProvider({
-            clientId: process.env.GOOGLE_ID || '',
-            clientSecret: process.env.GOOGLE_SECRET || '',
+            clientId: process.env.GOOGLE_ID!,
+            clientSecret: process.env.GOOGLE_SECRET!,
+        }),
+        GitHubProvider({
+            clientId: process.env.GITHUB_ID!,
+            clientSecret: process.env.GITHUB_SECRET!,
         }),
         FacebookProvider({
-            clientId: process.env.FACEBOOK_ID || '',
-            clientSecret: process.env.FACEBOOK_SECRET || '',
+            clientId: process.env.FACEBOOK_ID!,
+            clientSecret: process.env.FACEBOOK_SECRET!,
         }),
         CredentialsProvider({
             name: "Credentials",
@@ -21,10 +25,34 @@ export const AuthOptions: NextAuthOptions = {
                 password: { label: "Password", type: "password" },
             },
             async authorize(credentials) {
-                const { email, password } = credentials as any;
-                const user = { id: "", email, password };
-                if (!user || !user.password) return null;
-                return user
+                try {
+                    const { email, password } = credentials as any;
+                    if (!email || !password) throw new Error("Please, fill all input!");
+
+                    const loginResponse = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/login`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ email, password })
+                    });
+
+                    if (!loginResponse.ok) {
+                        const errorResult = await loginResponse.json();
+                        throw new Error(errorResult.message || 'Login failed');
+                    }
+
+                    const result = await loginResponse.json();
+                    if (result.message === 'password not match') {
+                        throw new Error(result.message);
+                    }
+
+                    return result;
+                } catch (err) {
+                    const error = err as Error;
+                    console.error(error.message);
+                    throw new Error(JSON.stringify(error.message || 'internet connection error'));
+                }
             }
         }),
     ],
@@ -36,27 +64,31 @@ export const AuthOptions: NextAuthOptions = {
         strategy: "jwt",
     },
     callbacks: {
-        async jwt({ token, user }) {
-            return {
-                ...token,
-                ...user,
-            };
+        async session({ session, token }: any) {
+            session.user = token.user;
+            return session;
         },
-        async session({ session, token }) {
-            return {
-                ...session,
-                ...token,
-            };
+        async jwt({ token, user }) {
+            if (user) {
+                token.user = user;
+            }
+            return token;
         },
         async signIn({ user, account }: any) {
             try {
                 console.log(account);
                 if (user) {
                     const { name, email, image } = user
-                    console.log(user);
-                    // post data in server
-                    // const loginResponse = await axios.post(process.env.NEXT_PUBLIC_SERVER_URL + '/providerLogin', { name, email, image, phone: "", streetAddress: "", city: "" });
-                    // console.log("login res", loginResponse);
+                    //post data in server
+                    const loginResponse = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/user', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ email, name, password: '', status: 'active', photo: image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUDOlaA7x6auc_yDvEigMgyktyrJBM34AFOaauo6-qXD5zg_vpZlZk9offXf9PMLdA0Lw&usqp=CAU" })
+                    });
+                    const result = await loginResponse.json()
+                    console.log("login res", result);
                     return user
                 }
                 return false
@@ -64,5 +96,8 @@ export const AuthOptions: NextAuthOptions = {
                 return false
             }
         }
+    },
+    pages: {
+        signIn: '/login',  // Specify your login page URL
     },
 };

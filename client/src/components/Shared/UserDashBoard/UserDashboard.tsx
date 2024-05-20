@@ -23,6 +23,8 @@ const UserDashboard = ({ children }: { children: ReactNode }) => {
     const [slide, setSlide] = useState(false);
     const [showDropDown, setShowDropDown] = useState(false);
 
+    console.log(userInfo);
+
     return (
         <div>
             <nav className="bg-gradient-to-r from-[#181716] to-[#070806] px-4">
@@ -79,7 +81,7 @@ const UserDashboard = ({ children }: { children: ReactNode }) => {
             <div className="flex flex-row">
                 <div className="w-80 bg-gradient-to-br from-[#0e0d0c] to-[#070806] h-[calc(100vh-80px)] hidden lg:block">
                     <div className="flex gap-x-2 items-center p-2 bg-[#131412]">
-                        {userInfo && <Image height={200} width={200} className="h-12 w-auto rounded-full" src={userInfo?.image !== null ? `${userInfo?.image}` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUDOlaA7x6auc_yDvEigMgyktyrJBM34AFOaauo6-qXD5zg_vpZlZk9offXf9PMLdA0Lw&usqp=CAU"} alt="img" />}
+                        {userInfo && <Image height={200} width={200} className="h-12 w-auto rounded-full" src={userInfo?.image !== '' ? `${userInfo?.image}` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUDOlaA7x6auc_yDvEigMgyktyrJBM34AFOaauo6-qXD5zg_vpZlZk9offXf9PMLdA0Lw&usqp=CAU"} alt="img" />}
 
 
                         <span className="truncate">

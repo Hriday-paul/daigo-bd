@@ -12,25 +12,120 @@ body::-webkit-scrollbar-thumb {
   border-radius: 20px;
 }
 
-.ant-space-item{
+.ant-space-item {
   width: 100%;
 }
-.ant-drawer-close, .ant-drawer-title{
+
+.ant-drawer-close,
+.ant-drawer-title {
   color: white !important;
 }
+
 /* #211D22 */
-.ant-modal-content, .ant-modal-title{
-  background-color: #0C0D0B !important; 
+.ant-modal-content,
+.ant-modal-title {
+  background-color: #0C0D0B !important;
   color: white !important;
 }
-.ant-modal-close{
+
+.ant-modal-close {
   color: rgb(179, 179, 179) !important;
 }
-.button, [type='button']{
+
+.button,
+[type='button'] {
   background-color: #1C1B19;
   border: 1 solid white;
   color: white;
 }
-.button, [type='button']:hover{
+
+.button,
+[type='button']:hover {
   background-color: #1C1B19;
+}
+
+.register {
+  h1 {
+    font-weight: bold;
+    margin: 0;
+    font-size: 25px;
+    color: white;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  span {
+    font-size: 12px;
+    color: white;
+  }
+
+  button {
+    border-radius: 20px;
+    border: 1px solid #14B8A6;
+    background-color: #14B8A6;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+  }
+
+  button:active {
+    transform: scale(0.95);
+  }
+
+  button:focus {
+    outline: none;
+  }
+
+  button.ghost {
+    background-color: transparent;
+    border-color: #FFFFFF;
+  }
+
+  form {
+    background-color: #131412;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+  }
+
+  input {
+    background-color: #1b1d1b;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+    outline: none;
+    color: white
+  }
+
+  input:focus {
+    border: 1px solid #575757;
+
+  }
+
+
+  .social-container {
+    margin: 20px 0;
+  }
+
+  .social-container a {
+    border: 1px solid #DDDDDD;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    height: 40px;
+    width: 40px;
+  }
 }

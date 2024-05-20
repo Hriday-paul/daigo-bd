@@ -1,3 +1,4 @@
+import Private from '@/Provider/Private';
 import AdminHome from '@/components/Shared/AdminDashboard/AdminHome/AdminHome';
 import UserHome from '@/components/Shared/UserDashBoard/UserHome/UserHome';
 import { AuthOptions } from '@/components/Utils/AuthOptions';
@@ -16,7 +17,12 @@ const dashboardPage = async () => {
         return (
             <div>
                 {
-                    adminVerifyData.admin ? <AdminHome></AdminHome> : <UserHome></UserHome>
+                    adminVerifyData.admin ? <Private>
+                        <AdminHome></AdminHome>
+                    </Private> :
+                        <Private>
+                            <UserHome></UserHome>
+                        </Private>
                 }
             </div>
         );

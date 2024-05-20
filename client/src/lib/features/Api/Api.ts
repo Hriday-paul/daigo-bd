@@ -50,15 +50,15 @@ const baseApi = createApi({
         getTestResult: builder.query<myAppoinMentType[], { email: string }>({
             query: ({ email }) => `/appoinments/${email}?type=complete`,
         }),
-        creatUser: builder.mutation<userType, any>({
+        creatUser: builder.mutation<any, userType>({
             query: (userData) => ({
                 url: `/user`,
-                method: 'PUT',
+                method: 'POST',
                 body: userData
             }),
         }),
     })
 });
 
-export const { useUserDashboardDataQuery, useMyAppoinmentsQuery, useDeleteAppoinmentsMutation, useGetTestResultQuery, useCreatUserMutation } = baseApi
+export const { useUserDashboardDataQuery, useMyAppoinmentsQuery, useDeleteAppoinmentsMutation, useGetTestResultQuery, useCreatUserMutation } = baseApi;
 export default baseApi;

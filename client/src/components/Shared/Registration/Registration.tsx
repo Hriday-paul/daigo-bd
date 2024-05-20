@@ -2,9 +2,11 @@
 
 import { useCreatUserMutation } from "@/lib/features/Api/Api";
 import { signIn, useSession } from "next-auth/react";
-import Image from "next/image";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { FaGithub, FaGoogle } from "react-icons/fa";
+import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 type Inputs = {
     name: string,
@@ -14,7 +16,10 @@ type Inputs = {
 
 const Registration = () => {
     const session = useSession();
-    const [creatUser, { isLoading, isError, isSuccess }] = useCreatUserMutation();
+    const [creatUser, { isLoading, isError, isSuccess, error }] = useCreatUserMutation();
+    const router = useRouter();
+
+    if (session.status == 'authenticated') router.push('/');
 
     const {
         register,
@@ -30,107 +35,67 @@ const Registration = () => {
         });
     };
 
-    console.log(isSuccess, isLoading);
+    if (isError) {
+        const errdata = error as { status: number | string; error?: string, data?: { msg: string } }
+        if (errdata.status == 'FETCH_ERROR') {
+            toast.error('Check your internet connection')
+        }
+        else if (errdata.status == 400) {
+            toast.error(errdata?.data?.msg || 'Check your internet connection')
+        }
+        else toast.error('Something wrong, try again!')
+    };
 
-    
+    if (isSuccess) {
+        router.push('/login')
+    }
+
 
     return (
-        <div>
-            <div className="min-h-screen bg-[#070806] flex justify-center">
-                <div className="max-w-screen-xl m-0 sm:m-10 bg-[#131412] shadow sm:rounded-lg flex justify-center flex-1">
-                    <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
-
-                        <div className="mt-12 flex flex-col items-center">
-                            <h1 className="text-2xl xl:text-3xl font-extrabold text-white">
-                                Sign up
-                            </h1>
-                            <div className="w-full flex-1 mt-8">
-                                <div className="flex flex-col items-center">
-                                    <button onClick={() => signIn('google')}
-                                        className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-[#667EEA] text-gray-200 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
-                                        <div className="bg-white p-2 rounded-full">
-                                            <svg className="w-4" viewBox="0 0 533.5 544.3">
-                                                <path
-                                                    d="M533.5 278.4c0-18.5-1.5-37.1-4.7-55.3H272.1v104.8h147c-6.1 33.8-25.7 63.7-54.4 82.7v68h87.7c51.5-47.4 81.1-117.4 81.1-200.2z"
-                                                    fill="#4285f4" />
-                                                <path
-                                                    d="M272.1 544.3c73.4 0 135.3-24.1 180.4-65.7l-87.7-68c-24.4 16.6-55.9 26-92.6 26-71 0-131.2-47.9-152.8-112.3H28.9v70.1c46.2 91.9 140.3 149.9 243.2 149.9z"
-                                                    fill="#34a853" />
-                                                <path
-                                                    d="M119.3 324.3c-11.4-33.8-11.4-70.4 0-104.2V150H28.9c-38.6 76.9-38.6 167.5 0 244.4l90.4-70.1z"
-                                                    fill="#fbbc04" />
-                                                <path
-                                                    d="M272.1 107.7c38.8-.6 76.3 14 104.4 40.8l77.7-77.7C405 24.6 339.7-.8 272.1 0 169.2 0 75.1 58 28.9 150l90.4 70.1c21.5-64.5 81.8-112.4 152.8-112.4z"
-                                                    fill="#ea4335" />
-                                            </svg>
-                                        </div>
-                                        <span className="ml-4">
-                                            Sign Up with Google
-                                        </span>
-                                    </button>
-
-                                    <button
-                                        onClick={() => signIn('github')}
-                                        className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-[#252724] text-gray-200 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline mt-5">
-                                        <div className="bg-white p-1 rounded-full">
-                                            <svg className="w-6" viewBox="0 0 32 32">
-                                                <path fillRule="evenodd"
-                                                    d="M16 4C9.371 4 4 9.371 4 16c0 5.3 3.438 9.8 8.207 11.387.602.11.82-.258.82-.578 0-.286-.011-1.04-.015-2.04-3.34.723-4.043-1.609-4.043-1.609-.547-1.387-1.332-1.758-1.332-1.758-1.09-.742.082-.726.082-.726 1.203.086 1.836 1.234 1.836 1.234 1.07 1.836 2.808 1.305 3.492 1 .11-.777.422-1.305.762-1.605-2.664-.301-5.465-1.332-5.465-5.93 0-1.313.469-2.383 1.234-3.223-.121-.3-.535-1.523.117-3.175 0 0 1.008-.32 3.301 1.23A11.487 11.487 0 0116 9.805c1.02.004 2.047.136 3.004.402 2.293-1.55 3.297-1.23 3.297-1.23.656 1.652.246 2.875.12 3.175.77.84 1.231 1.91 1.231 3.223 0 4.61-2.804 5.621-5.476 5.922.43.367.812 1.101.812 2.219 0 1.605-.011 2.898-.011 3.293 0 .32.214.695.824.578C24.566 25.797 28 21.3 28 16c0-6.629-5.371-12-12-12z" />
-                                            </svg>
-                                        </div>
-                                        <span className="ml-4">
-                                            Sign Up with GitHub
-                                        </span>
-                                    </button>
-                                </div>
-
-                                <div className="my-12 border-b text-center">
-                                    <div
-                                        className="leading-none px-2 inline-block text-sm text-gray-300 tracking-wide font-medium bg-[#131412] transform translate-y-1/2">
-                                        Or sign up with e-mail
-                                    </div>
-                                </div>
-
-                                <form onSubmit={handleSubmit(handleRegister)} className="mx-auto max-w-xs">
-                                    <input
-                                        className="w-full px-8 py-4 rounded-lg font-medium bg-[#1b1d1b] border border-gray-700 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-600 focus:bg-[#191b19] text-gray-200"
-                                        type="text" placeholder="Name" {...register("name", { required: true })} />
-                                    {errors.name && <p className="text-red-500 text-sm">Name is required</p>}
-                                    <input
-                                        className="w-full px-8 py-4 rounded-lg font-medium bg-[#1b1d1b] border border-gray-700 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-600 focus:bg-[#191b19] text-gray-200 mt-5"
-                                        type="email" placeholder="Email" {...register("email", { required: true })} />
-                                    {errors.email && <p className="text-red-500 text-sm">Email is required</p>}
-                                    <input
-                                        className="w-full px-8 py-4 rounded-lg font-medium  bg-[#1b1d1b] border border-gray-700 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-600 focus:bg-[#191b19] text-gray-200 mt-5"
-                                        type="password" placeholder="Password" {...register("password", { required: true, pattern: /(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/, minLength: 6 })} />
-                                    {errors.password && <p className="text-red-500 text-sm">use minimum 1 capital, 1 number and 1 special character & 6 length</p>}
-                                    <button
-                                        className="mt-5 tracking-wide font-semibold bg-indigo-400 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-500 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-                                        <svg className="w-6 h-6 -ml-2" fill="none" stroke="currentColor" strokeWidth="2"
-                                            strokeLinecap="round" strokeLinejoin="round">
-                                            <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                                            <circle cx="8.5" cy="7" r="4" />
-                                            <path d="M20 8v6M23 11h-6" />
-                                        </svg>
-                                        <span className="ml-3">
-                                            Sign Up
-                                        </span>
-                                    </button>
-                                    <p className="text-sm font-light text-gray-200 mt-4">
-                                        Already have an account? <Link href="/login" className="font-medium text-gray-300 hover:underline">Login here</Link>
-                                    </p>
-                                </form>
-                            </div>
-                        </div>
+        <div className="register flex justify-center items-center min-h-screen bg-[#070806]">
+            {
+                isLoading && <div className="absolute bg-white bg-opacity-60 z-10 h-full w-full flex items-center justify-center">
+                    <div className="flex items-center">
+                        <div className="border-gray-300 h-10 w-10 animate-spin rounded-full border-8 border-t-teal-600" />
                     </div>
-                    <div className="flex-1 bg-[#131412] text-center hidden lg:flex">
-                        <div className="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat relative"
-                        >
-                            <Image fill={true} src="https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg" placeholder="blur" blurDataURL="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXyxBhtHVMtJ-M_CanTxe3j0uDsziyjG4LvtUelfvNbR-yWbGPQdEldOpa4Flklwhaq44&usqp=CAU" alt="bg-img" />
+                </div>
+            }
+            <div className="grid grid-cols-1 lg:grid-cols-2 items-center w/1/2 lg:w-[768px] bg-[#131412] rounded-md">
+                <div className="py-12">
+                    <form onSubmit={handleSubmit(handleRegister)}>
+                        <h1>Sign Up</h1>
+                        <div className="social-container flex flex-row gap-x-2 items-center">
+                            <div onClick={() => signIn('google')} className="p-2.5 border border-teal-400 rounded-full cursor-pointer">
+                                <FaGoogle className="text-xl text-white" />
+                            </div>
+                            <div onClick={() => signIn('github')} className="p-2.5 border border-teal-400 rounded-full cursor-pointer">
+                                <FaGithub className="text-xl text-white" />
+                            </div>
+
+                        </div>
+                        <span>or use your email for registration</span>
+                        <input type="text" id="name" placeholder="Name" {...register("name", { required: true })} className="" />
+                        {errors.name && <p className="text-red-500 text-xs text-left">Name is required</p>}
+                        <input type="email" placeholder="Email" {...register("email", { required: true })} />
+                        {errors.email && <p className="text-red-500 text-xs text-left">Email is required</p>}
+                        <input type="password" placeholder="Password" {...register("password", { required: true, pattern: /(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/, minLength: 6 })} />
+                        {errors.password && <p className="text-red-500 text-xs text-left">use minimum 1 capital, 1 number and 1 special character & 6 length</p>}
+                        <button className="mt-5">Sign Up</button>
+                    </form>
+                </div>
+                <div className="bg-teal-500 h-full hidden lg:block">
+                    <div className="flex justify-center items-center h-full mx-auto">
+                        <div className="mx-auto px-10 flex flex-col justify-center">
+                            <h1 className="text-center text-white">Hello, Patient!</h1>
+                            <p className="text-center text-white font-medium text-sm leading-5 m-5">Enter your personal details and start journey with us</p>
+                            <div className="mx-auto">
+                                <Link href='/login'><button className="ghost" id="signIn">Sign In</button></Link>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <Toaster />
         </div>
     );
 };

@@ -1,10 +1,11 @@
+import Private from "@/Provider/Private";
 import AppoinMents from "@/components/Shared/UserDashBoard/AppoinMents/AppoinMents";
 
 const myAppoinmentsPage = () => {
     
     return (
         <div>
-            <AppoinMents />
+            <Private><AppoinMents /></Private>
         </div>
     );
 };

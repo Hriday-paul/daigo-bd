@@ -1,6 +1,6 @@
 const express = require("express");
 const { addOrUpdateReservation, getReservations, updateResurvation, getTestByUser, deleteAppoinment, mostSellResurvation, getUserDashBoardCount } = require("../controler/reservations");
-const { checkIsAdmin, addOrUpdateUser, allUsers } = require("../controler/users");
+const { checkIsAdmin, addOrUpdateUser, allUsers, creatNewUser, loginUser } = require("../controler/users");
 const { addNewTest, allTests, updateTest, testDetails, deleteTest } = require("../controler/tests");
 const { getAdminDash, verifyAdmin } = require("../controler/admin");
 const { prevDateList } = require("../controler/prevDate");
@@ -13,13 +13,17 @@ router.put("/addReservation", addOrUpdateReservation);
 router.get("/isAdmin/:email", checkIsAdmin);
 
 // add or update user
-router.put('/user', addOrUpdateUser)
+router.put('/user', addOrUpdateUser);
+
+router.post('/user', creatNewUser);
+
+router.post('/login', loginUser);
 
 // get all users
 router.get('/users', verifyAdmin, allUsers);
 
 // add new tests
-router.post('/addTest',verifyAdmin, addNewTest);
+router.post('/addTest', verifyAdmin, addNewTest);
 
 //get all tests
 router.get('/allTest', allTests);
@@ -42,17 +46,17 @@ router.put('/updateReservation', updateResurvation);
 // get user wise appoinments
 router.get('/appoinments/:email', getTestByUser);
 
- // delete a appoinment
- router.delete('/delAppoinment/:id', deleteAppoinment);
+// delete a appoinment
+router.delete('/delAppoinment/:id', deleteAppoinment);
 
- // get most frequent collection
- router.get('/mostFrequent', mostSellResurvation);
+// get most frequent collection
+router.get('/mostFrequent', mostSellResurvation);
 
- // get usr dashboard collection
- router.get('/userDash/:email', getUserDashBoardCount);
+// get usr dashboard collection
+router.get('/userDash/:email', getUserDashBoardCount);
 
- // admin dashboard data
- router.get('/adminDash/:prevDays', verifyAdmin, prevDateList, getAdminDash)
+// admin dashboard data
+router.get('/adminDash/:prevDays', verifyAdmin, prevDateList, getAdminDash)
 
 
 module.exports = router;
