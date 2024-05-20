@@ -2,7 +2,7 @@
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FaGithub, FaGoogle } from "react-icons/fa6";
@@ -15,11 +15,22 @@ type Inputs = {
 const LoginClient = () => {
     const session = useSession();
     const router = useRouter();
-    const [formLoading, setFormLoading] = useState<boolean>(false)
+    const [formLoading, setFormLoading] = useState<boolean>(false);
+    const { status } = session
 
     //if (session.status == 'authenticated') router.push('/');
 
     console.log(session);
+
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            console.log("No JWT");
+            console.log(status);
+           
+        } else if (status === "authenticated") {
+            void router.back();
+        }
+    }, [status, router]);
 
     const {
         register,
@@ -32,7 +43,7 @@ const LoginClient = () => {
         signIn("credentials", { email: data.email, password: data.password, redirect: false }).then(async ({ ok, error }: any) => {
             console.log(ok);
             if (ok && !error) {
-                router.push('/');
+                router.back();
                 //location.reload();
             } else if (!ok && error) {
                 toast.error(error);

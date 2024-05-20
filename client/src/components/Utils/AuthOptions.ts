@@ -19,13 +19,14 @@ export const AuthOptions: NextAuthOptions = {
             clientSecret: process.env.FACEBOOK_SECRET!,
         }),
         CredentialsProvider({
-            name: "Credentials",
+            name: "credentials",
             credentials: {
                 email: { label: "Email", type: "email", placeholder: "" },
                 password: { label: "Password", type: "password" },
             },
             async authorize(credentials) {
                 try {
+                    console.log('Im in user form login', credentials);
                     const { email, password } = credentials as any;
                     if (!email || !password) throw new Error("Please, fill all input!");
 
@@ -76,7 +77,7 @@ export const AuthOptions: NextAuthOptions = {
         },
         async signIn({ user, account }: any) {
             try {
-                console.log(account);
+                console.log('Im test user sign in',user);
                 if (user) {
                     const { name, email, image } = user
                     //post data in server

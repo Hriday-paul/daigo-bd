@@ -32,12 +32,12 @@ const creatNewUser = async (req, res) => {
 const addOrUpdateUser = async (req, res) => {
     try {
         const filter = { email: req.body.email }
-        const options = { upsert: true };
-        const updateDoc = {
-            $set: { ...req.body, role: 'user' }
+        const user = await userStore.findOne(filter);
+        if (user) {
+            return res.status(200).send({ messge: 'login successfully' });
         }
-        const result = await userStore.updateOne(filter, updateDoc, options);
-        res.send(result);
+        const result = await userStore.collection.insertOne(req.body);
+        res.status(200).send({ messge: 'login successfully' });
     } catch (err) {
         res.status(400).send({ message: err.message })
     }

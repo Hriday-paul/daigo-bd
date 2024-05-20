@@ -27,7 +27,7 @@ const UserHome = () => {
                             <div className='flex flex-row gap-x-2 items-center'>
                                 <h4 className='text-2xl font-bold text-gray-200'>
                                     {
-                                        <CountUp delay={1} duration={6} end={dashboardData?.reserveResult || 4} enableScrollSpy={true} scrollSpyOnce={true} />
+                                        <CountUp delay={1} duration={6} end={dashboardData?.reserveResult || 0} enableScrollSpy={true} scrollSpyOnce={true} />
                                     }
                                 </h4>
                             </div>
@@ -44,7 +44,7 @@ const UserHome = () => {
                         <div className='flex flex-row gap-x-2 items-center'>
                             <h4 className='text-2xl font-bold text-gray-200'>
                                 {
-                                    <CountUp delay={1} duration={6} end={dashboardData?.totalAppoinments || 5} enableScrollSpy={true} scrollSpyOnce={true} />
+                                    <CountUp delay={1} duration={6} end={dashboardData?.totalAppoinments || 0} enableScrollSpy={true} scrollSpyOnce={true} />
                                 }
                             </h4>
                         </div>

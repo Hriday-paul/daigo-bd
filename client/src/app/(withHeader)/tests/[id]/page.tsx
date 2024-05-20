@@ -35,8 +35,6 @@ export async function generateMetadata({ params }: { params: { id: string } }, p
 const TestDetails = async ({ params }: { params: { id: string } }) => {
     const testData = await UseGetTestDetails(params.id) as testType;
 
-    console.log(testData);
-
     return (
         <div className='bg-[#070806]'>
             <PageTopUi breadCrumbItems={breadCrumbItems}>
