@@ -17,7 +17,9 @@ const LoginClient = () => {
     const router = useRouter();
     const [formLoading, setFormLoading] = useState<boolean>(false)
 
-    if (session.status == 'authenticated') router.push('/');
+    //if (session.status == 'authenticated') router.push('/');
+
+    console.log(session);
 
     const {
         register,
