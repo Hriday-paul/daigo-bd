@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 type Inputs = {
     name: string,
@@ -18,8 +19,17 @@ const Registration = () => {
     const session = useSession();
     const [creatUser, { isLoading, isError, isSuccess, error }] = useCreatUserMutation();
     const router = useRouter();
+    const { status } = session;
 
-    if (session.status == 'authenticated') router.push('/');
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            console.log("No JWT");
+            console.log(status);
+
+        } else if (status === "authenticated") {
+            void router.push('/login');
+        }
+    }, [status, router]);
 
     const {
         register,

@@ -18,15 +18,13 @@ const LoginClient = () => {
     const [formLoading, setFormLoading] = useState<boolean>(false);
     const { status } = session
 
-    //if (session.status == 'authenticated') router.push('/');
-
     console.log(session);
 
     useEffect(() => {
         if (status === "unauthenticated") {
             console.log("No JWT");
             console.log(status);
-           
+
         } else if (status === "authenticated") {
             void router.back();
         }
@@ -63,17 +61,17 @@ const LoginClient = () => {
             }
             <div className="grid grid-cols-1 lg:grid-cols-2 items-center w/1/2 lg:w-[768px] bg-[#131412] rounded-md">
                 <div className="py-12">
-                    <form action="#" onSubmit={handleSubmit(handleRegister)}>
-                        <h1>Sign In</h1>
-                        <div className="social-container flex flex-row gap-x-2 items-center">
-                            <div onClick={() => signIn('google')} className="p-2.5 border border-teal-400 rounded-full cursor-pointer">
-                                <FaGoogle className="text-xl text-white" />
-                            </div>
-                            <div onClick={() => signIn('google')} className="p-2.5 border border-teal-400 rounded-full cursor-pointer">
-                                <FaGithub className="text-xl text-white" />
-                            </div>
-
+                    <h1 className="text-center">Sign In</h1>
+                    <div className="social-container flex flex-row justify-center gap-x-2 items-center">
+                        <div onClick={() => signIn('google')} className="p-2.5 border border-teal-400 rounded-full cursor-pointer">
+                            <FaGoogle className="text-xl text-white" />
                         </div>
+                        <div onClick={() => signIn('google')} className="p-2.5 border border-teal-400 rounded-full cursor-pointer">
+                            <FaGithub className="text-xl text-white" />
+                        </div>
+
+                    </div>
+                    <form onSubmit={handleSubmit(handleRegister)}>
                         <span>or use your email for login</span>
                         <input type="email" placeholder="Email" {...register("email", { required: true })} />
                         <input type="password" placeholder="Password" {...register("password", { required: true })} />
