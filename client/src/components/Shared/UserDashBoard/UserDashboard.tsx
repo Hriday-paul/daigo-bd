@@ -114,13 +114,13 @@ const UserDashboard = ({ children }: { children: ReactNode }) => {
                 </div>
 
                 {/* mobile device */}
-                {/* <div className={`w-2/3 md:w-1/3 bg-gradient-to-br lg:hidden from-[#21201E] to-[#1a1917] h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] absolute top-[64px] md:top-[80px] z-50 left-0 ${slide ? "translate-x-0" : "-translate-x-[750px]"} duration-300`}>
+                <div className={`w-2/3 md:w-1/3 bg-gradient-to-br lg:hidden from-[#21201E] to-[#1a1917] h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] absolute top-[64px] md:top-[80px] z-50 left-0 ${slide ? "translate-x-0" : "-translate-x-[750px]"} duration-300`}>
                     <div className="flex gap-x-2 items-center p-2 bg-[#444341]">
-                        <img className="h-12 rounded-full" src={userInfo?.photoURL !== null ? `${userInfo.photoURL}` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUDOlaA7x6auc_yDvEigMgyktyrJBM34AFOaauo6-qXD5zg_vpZlZk9offXf9PMLdA0Lw&usqp=CAU"} alt="img" />
+                        {userInfo && <Image height={200} width={200} className="h-12 w-auto rounded-full" src={userInfo?.image !== '' ? `${userInfo?.image}` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUDOlaA7x6auc_yDvEigMgyktyrJBM34AFOaauo6-qXD5zg_vpZlZk9offXf9PMLdA0Lw&usqp=CAU"} alt="img" />}
 
                         <span className="truncate">
-                            <h3 className="text-lg font-medium font-serif text-white truncate">{userInfo.displayName}</h3>
-                            <p className="truncate text-white text-sm">{userInfo.email}</p>
+                            <h3 className="text-base font-medium font-unbounded text-white truncate">{userInfo?.name}</h3>
+                            <p className="truncate text-white text-sm">{userInfo?.email}</p>
                         </span>
                     </div>
 
@@ -130,21 +130,21 @@ const UserDashboard = ({ children }: { children: ReactNode }) => {
                             <LuLayoutDashboard className="text-white text-2xl mr-2"></LuLayoutDashboard>
                             <h4 className="text-lg text-white font-serif font-medium">Dashboard</h4>
                         </Link>
-                        <Link href="/dashboard/myAppoinments" onClick={() => setSlide(false)} className={({ isActive }) => isActive ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#131412] hover:bg-[#131412] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#131412] duration-100 rounded-sm shadow-xl"} >
+                        <Link href="/dashboard/myAppoinments" onClick={()=>setSlide(false)}  className={pathname == '/dashboard/myAppoinments' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#131412] hover:bg-[#131412] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#131412] duration-100 rounded-sm shadow-xl"} >
                             <CiViewList className="text-white text-2xl mr-2"></CiViewList>
                             <h4 className="text-lg text-white font-serif font-medium">Appoinments</h4>
                         </Link>
-                        <Link href="/dashboard/result" onClick={() => setSlide(false)} className={({ isActive }) => isActive ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#131412] hover:bg-[#131412] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#131412] duration-100 rounded-sm shadow-xl"} >
+
+                        <Link href="/dashboard/result" onClick={()=>setSlide(false)}  className={pathname == '/dashboard/result' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#131412] hover:bg-[#131412] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#131412] duration-100 rounded-sm shadow-xl"} >
                             <MdChecklist className="text-white text-2xl mr-2"></MdChecklist>
                             <h4 className="text-lg text-white font-serif font-medium">Test Result</h4>
                         </Link>
-
-                        <Link href="/dashboard/profile" onClick={() => setSlide(false)} className={({ isActive }) => isActive ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#131412] hover:bg-[#131412] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#131412] duration-100 rounded-sm shadow-xl"} >
+                        <Link href="/dashboard/profile" onClick={()=>setSlide(false)} className={pathname == '/dashboard/profile' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#131412] hover:bg-[#131412] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#131412] duration-100 rounded-sm shadow-xl"} >
                             <ImProfile className="text-white text-2xl mr-2"></ImProfile>
                             <h4 className="text-lg text-white font-serif font-medium">My Profile</h4>
                         </Link>
                     </div>
-                </div> */}
+                </div>
 
                 <div className="w-full bg-[#302E2B] h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] p-4 md:p-8 lg:p-10 overflow-auto">
                     {children}

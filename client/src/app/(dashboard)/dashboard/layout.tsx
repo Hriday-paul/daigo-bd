@@ -16,7 +16,7 @@ const dashboardLayoutRout = async ({ children }: { children: React.ReactNode }) 
         return (
             <div>
                 {
-                    adminVerifyData.admin ? <AdminDashboard></AdminDashboard> : <UserDashboard>{children} </UserDashboard>
+                    adminVerifyData.admin ? <AdminDashboard>{children}</AdminDashboard> : <UserDashboard>{children} </UserDashboard>
                 }
             </div>
         );

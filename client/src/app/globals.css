@@ -12,6 +12,27 @@ body::-webkit-scrollbar-thumb {
   border-radius: 20px;
 }
 
+.admin-scroll::-webkit-scrollbar {
+  width: 5px;
+  background-color: #1A1917;
+}
+
+.admin-scroll::-webkit-scrollbar-thumb {
+  background-color: #444341;
+  border-radius: 20px;
+}
+
+.table-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+  background-color: #1A1917;
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+  background-color: #444341;
+  border-radius: 20px;
+}
+
 .ant-space-item {
   width: 100%;
 }

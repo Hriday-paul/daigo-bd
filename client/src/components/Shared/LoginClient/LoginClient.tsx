@@ -17,16 +17,14 @@ const LoginClient = () => {
     const router = useRouter();
     const [formLoading, setFormLoading] = useState<boolean>(false);
     const { status } = session
-
-    console.log(session);
-
+    
     useEffect(() => {
         if (status === "unauthenticated") {
             console.log("No JWT");
             console.log(status);
 
         } else if (status === "authenticated") {
-            void router.back();
+            router.push('/dashboard')
         }
     }, [status, router]);
 
@@ -41,7 +39,7 @@ const LoginClient = () => {
         signIn("credentials", { email: data.email, password: data.password, redirect: false }).then(async ({ ok, error }: any) => {
             console.log(ok);
             if (ok && !error) {
-                router.back();
+                router.push('/dashboard')
                 //location.reload();
             } else if (!ok && error) {
                 toast.error(error);

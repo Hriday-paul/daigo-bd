@@ -27,7 +27,7 @@ const Registration = () => {
             console.log(status);
 
         } else if (status === "authenticated") {
-            void router.push('/login');
+            router.push('/login');
         }
     }, [status, router]);
 
@@ -84,7 +84,7 @@ const Registration = () => {
 
                         </div>
                         <span>or use your email for registration</span>
-                        <input type="text" id="name" placeholder="Name" {...register("name", { required: true })} className="" />
+                        <input type="text" id="name" placeholder="Name" {...register("name", { required: true })} />
                         {errors.name && <p className="text-red-500 text-xs text-left">Name is required</p>}
                         <input type="email" placeholder="Email" {...register("email", { required: true })} />
                         {errors.email && <p className="text-red-500 text-xs text-left">Email is required</p>}

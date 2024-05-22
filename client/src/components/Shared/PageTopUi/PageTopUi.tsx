@@ -7,7 +7,7 @@ const PageTopUi = ({ children, breadCrumbItems }: { children: React.ReactNode, b
     return (
         <div>
             <div className="relative">
-                <Image className="w-full h-[35vh] md:h-[55vh] lg:h-[60vh] brightness-50" src={`https://res.cloudinary.com/devlj6p7h/image/upload/v1710565625/test/qqwid0ueckoamuakbhag.jpg`} height={200} width={500} alt="banner image" />
+                <Image className="w-full h-[27vh] md:h-[40vh] lg:h-[60vh] brightness-50" src={`https://res.cloudinary.com/devlj6p7h/image/upload/v1710565625/test/qqwid0ueckoamuakbhag.jpg`} height={200} width={500} alt="banner image" />
                 <span className="absolute bottom-0 left-0 h-[calc(40vh-120px)] md:h-[calc(55vh-128px)] lg:h-[calc(60vh-152px)] w-full flex justify-center items-center flex-col gap-y-0 md:gap-y-3 lg:gap-y-4">
                     <h2 className="text-center text-white text-2xl md:text-3xl lg:text-5xl font-medium font-sans uppercase">{children}</h2>
                     <BreadCrumb breadCrumbItems={breadCrumbItems}/>

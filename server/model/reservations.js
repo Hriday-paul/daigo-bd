@@ -36,6 +36,9 @@ const reserveSchema = Schema(
             required: true,
             enum: ['pending', 'complete', 'cencel']
         },
+        reportFile : {
+            type : String
+        }
     }
 );
 

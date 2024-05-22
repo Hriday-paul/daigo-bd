@@ -4,6 +4,8 @@ const { checkIsAdmin, addOrUpdateUser, allUsers, creatNewUser, loginUser } = req
 const { addNewTest, allTests, updateTest, testDetails, deleteTest } = require("../controler/tests");
 const { getAdminDash, verifyAdmin } = require("../controler/admin");
 const { prevDateList } = require("../controler/prevDate");
+const { addDoctor, getAllDoctorrs, getActiveDoctors, doctorDetails } = require("../controler/doctor");
+const { sendMail } = require("../controler/email");
 const router = express.Router();
 
 // add reservation
@@ -56,7 +58,21 @@ router.get('/mostFrequent', mostSellResurvation);
 router.get('/userDash/:email', getUserDashBoardCount);
 
 // admin dashboard data
-router.get('/adminDash/:prevDays', verifyAdmin, prevDateList, getAdminDash)
+router.get('/adminDash/:prevDays', verifyAdmin, prevDateList, getAdminDash);
+
+// add doctor
+router.post('/doctor', verifyAdmin, addDoctor);
+
+// get all doctors
+router.get('/doctors', getAllDoctorrs);
+
+// get all doctors
+router.get('/doctors/active', getActiveDoctors);
+
+// get doctor details
+router.get('/doctors/:id', doctorDetails);
+
+router.post('/email', sendMail)
 
 
 module.exports = router;

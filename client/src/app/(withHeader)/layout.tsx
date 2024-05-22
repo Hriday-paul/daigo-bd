@@ -7,7 +7,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     return (
         <div>
             <Navbar />
-            <Toaster />
+            <Toaster position="top-right" reverseOrder={false}/>
             {children}
             <Footer />
         </div>
