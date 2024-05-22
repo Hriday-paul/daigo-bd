@@ -7,13 +7,12 @@ import { IoIosMailUnread } from "react-icons/io";
 import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-// import MobilaNavDrawer from "../Ui/MobilaNavDrawer";
+import MobileNav from "@/components/Ui/MobileNav/MobileNav";
 
 
 
 const Navbar = () => {
     const session =useSession();
-    console.log(session);
     const [showTopNav, setShowTopNav] = useState(true);
     const handleScroll = () => {
         if (document.body.scrollTop > 120 || document.documentElement.scrollTop > 120) {
@@ -96,7 +95,7 @@ const Navbar = () => {
                             </span>
                             <span className="relative text-sm md:text-base">My Appoinments</span>
                         </Link>
-                        {/* <MobilaNavDrawer/> */}
+                        <MobileNav />
                     </div>
                 </div>
             </div>

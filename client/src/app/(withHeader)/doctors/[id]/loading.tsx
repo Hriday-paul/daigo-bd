@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
-const testloader = () => {
+const doctorload = () => {
     return (
         <div>
             <div className='min-h-screen flex justify-center items-center bg-[#070806]'>
@@ -11,4 +11,4 @@ const testloader = () => {
     );
 };
 
-export default testloader;
+export default doctorload;

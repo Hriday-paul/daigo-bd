@@ -42,8 +42,7 @@ const AdminDashboard = ({ children }: { children: ReactNode }) => {
 
                             </li>
                             <li className="flex items-center justify-center">
-                                {userInfo && <Image height={200} width={200} className="h-12 w-auto rounded-full" src={userInfo?.image !== '' ? `${userInfo?.image}` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUDOlaA7x6auc_yDvEigMgyktyrJBM34AFOaauo6-qXD5zg_vpZlZk9offXf9PMLdA0Lw&usqp=CAU"} alt="img" />}
-
+                                
                                 <div className="relative flex items-center cursor-pointer" onClick={() => setShowDropDown(!showDropDown)}>
                                     <p className="text-white font-sans text-base md:text-lg ml-1">Profile</p>
                                     <RiArrowDropDownLine className={showDropDown ? 'text-3xl text-white -ml-1 rotate-180 duration-100' : 'text-3xl text-white -ml-1 duration-100'}></RiArrowDropDownLine>
@@ -121,7 +120,7 @@ const AdminDashboard = ({ children }: { children: ReactNode }) => {
                 </div>
 
                 {/* medium & small device */}
-                <div className={`w-2/3 md:w-1/3 bg-gradient-to-br lg:hidden from-[#21201E] to-[#1a1917] h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] absolute top-[64px] md:top-[80px] z-50 left-0 ${slide ? "translate-x-0" : "-translate-x-[750px]"} duration-300`}>
+                <div className={`w-2/3 md:w-1/3 bg-gradient-to-br lg:hidden from-[#21201E] to-[#1a1917] h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] absolute top-[64px] md:top-[80px] z-50 left-0 ${slide ? "translate-x-0" : "-translate-x-[750px]"} duration-300 overflow-auto`}>
                     <div className="flex gap-x-2 items-center p-2 bg-[#444341]">
                         {userInfo && <Image height={200} width={200} className="h-12 w-auto rounded-full" src={userInfo?.image !== '' ? `${userInfo?.image}` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUDOlaA7x6auc_yDvEigMgyktyrJBM34AFOaauo6-qXD5zg_vpZlZk9offXf9PMLdA0Lw&usqp=CAU"} alt="img" />}
 
@@ -150,7 +149,7 @@ const AdminDashboard = ({ children }: { children: ReactNode }) => {
                             <FaListCheck className="text-white text-xl mr-2"></FaListCheck>
                             <h4 className="text-lg text-white font-serif font-medium">Reservation</h4>
                         </Link>
-                        <Link href="/dashboard/doctors" className={pathname === '/dashboard/doctors' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl"} >
+                        <Link href="/dashboard/doctors" onClick={() => setSlide(false)} className={pathname === '/dashboard/doctors' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl"} >
                             <FaUserDoctor className="text-white text-xl mr-2"></FaUserDoctor>
                             <h4 className="text-lg text-white font-serif font-medium">Doctors</h4>
                         </Link>

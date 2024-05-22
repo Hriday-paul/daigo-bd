@@ -38,7 +38,7 @@ const HomeSlider = () => {
             <div data-aos="fade-left" data-aos-duration="1500" className="absolute bottom-0 left-5 lg:left-28 h-[calc(350px-116px)] md:h-[calc(100vh-140px)] lg:h-[calc(100vh-164px)] flex items-center z-10  min-w-full">
                 <div className="bg-black/60 p-5 md:p-7 lg:p-10 w-[250px] md:w-[400px] lg:w-[500px]">
                     <button className="relative px-2 md:px-3 py-2 md:py-3 mb-3 md:mb-5 lg:mb-7 font-medium text-white transition duration-300 bg-[#008080]  hover:bg-[#1e5e5e] ease">
-                        <Link href='/allTest'>
+                        <Link href='/tests'>
                             <span className="absolute bottom-0 left-0 h-full ml-0">
                                 <svg viewBox="0 0 487 487" className="w-auto h-full opacity-100 object-stretch" xmlns="http://www.w3.org/2000/svg"><path d="M0 .3c67 2.1 134.1 4.3 186.3 37 52.2 32.7 89.6 95.8 112.8 150.6 23.2 54.8 32.3 101.4 61.2 149.9 28.9 48.4 77.7 98.8 126.4 149.2H0V.3z" fill="#FFF" fillRule="nonzero" fillOpacity=".1"></path></svg>
                             </span>
