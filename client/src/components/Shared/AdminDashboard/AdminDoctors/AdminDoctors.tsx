@@ -23,10 +23,6 @@ const AdminDoctors = () => {
                 </div>
 
                 {
-
-                }
-
-                {
                     isLoading ? <ClientLoading /> : isError ? <ClientError /> :
                         <div>
                             <div className="text-right my-3">

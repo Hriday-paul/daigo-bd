@@ -3,7 +3,9 @@ import { doctor } from "../Shared/HomeDoctors/HomeDoctors";
 
 const UseDoctorDetails = async (id: string): Promise<doctor | null> => {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/doctors/${id}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/doctors/${id}`, {
+            next : {revalidate : 5}
+        });
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }

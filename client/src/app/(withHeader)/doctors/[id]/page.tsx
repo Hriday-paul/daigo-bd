@@ -111,7 +111,7 @@ const DoctorDetails = async ({ params }: { params: { id: string } }) => {
                                 </div>
                                 <p data-aos="fade-up" data-aos-duration='1200' className='basis-full text-gray-300 text-base text-justify mb-10'>{details?.details}</p>
 
-                                <div className='flex items-center gap-x-2 my-5' data-aos="fade-right" data-aos-duration='1200'>
+                                <div className='flex items-center gap-x-2 my-5'>
                                     <h4 className='text-teal-500 text-3xl font-unbounded inline-block '>Education</h4>
                                     <span className="mt-1 block border-t border-teal-500 w-16" aria-hidden="true"></span>
                                 </div>
@@ -133,16 +133,16 @@ const DoctorDetails = async ({ params }: { params: { id: string } }) => {
 
                                 {
                                     Array.isArray(details?.certificate) ? details?.certificate.length > 0 ? <div>
-                                        <div className='flex items-center gap-x-2 my-5' data-aos="fade-right" data-aos-duration='1200'>
+                                        <div className='flex items-center gap-x-2 my-5'>
                                             <h4 className='text-teal-500 text-3xl font-unbounded inline-block '>Certificate</h4>
                                             <span className="mt-1 block border-t border-teal-500 w-16" aria-hidden="true"></span>
                                         </div>
                                         <div data-aos='fade-top' data-aos-duration='1500'>
-                                            <div className='flex flex-col md:flex-row md:flex-wrap gap-3 justify-center'>
+                                            <div className='flex flex-col md:flex-row md:flex-wrap gap-3 justify-center md:justify-start ml-0 md:ml-14 '>
                                                 {
                                                     details?.certificate?.map((certific, indx) => {
                                                         return <div key={certific + indx} className="rounded-sm h-full w-auto mx-auto md:mx-0">
-                                                            {/* <Image src={certific} height={200} width={200} className='w-auto h-full' alt='certificate'></Image> */}
+                                                            
                                                             <Certificate img={certific} />
                                                         </div>
                                                     })

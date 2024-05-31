@@ -79,7 +79,7 @@ const Reservation = () => {
                                                             {reservation?.phone}
                                                         </td>
                                                         <td>
-                                                            {reservation?.testDetails[0].name}
+                                                            {reservation?.testDetails[0]?.name}
                                                         </td>
                                                         <td>
                                                             {reservation?.testDetails[0]?.price}

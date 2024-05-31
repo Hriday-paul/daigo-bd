@@ -38,11 +38,11 @@ const Navbar = () => {
                     <div className="flex gap-x-2 md:gap-x-3 lg:gap-x-5">
                         <div className="flex gap-x-1 items-center">
                             <MdOutlinePhonePaused className="text-xs md:text-base"/>
-                            <p className="text-xs md:text-base md:font-medium">+880187949494</p>
+                            <p className="text-xs md:text-sm md:font-normal font-unbounded">+880187949494</p>
                         </div>
                         <div className="flex gap-x-1 items-center">
                             <IoIosMailUnread className="text-xs md:text-base"/>
-                            <p className="text-xs md:text-base md:font-medium">xyz@gmail.com</p>
+                            <p className="ext-xs md:text-sm md:font-normal font-unbounded">xyz@gmail.com</p>
                         </div>
                     </div>
 
@@ -56,9 +56,9 @@ const Navbar = () => {
                 </div>
 
                 <div className="flex items-center justify-between py-3">
-                    <Link href='/' className="flex items-center gap-x-2">
-                        <Image className="h-10 md:h-14 lg:h-20 w-12 md:w-16 lg:w-24" src={logo} height={200} width={200} alt="logo" />
-                        <h1 className="uppercase text-xl md:text-2xl lg:text-3xl font-bold text-[#00C4CC] font-unbounded">MediCare</h1>
+                    <Link href='/' className="flex items-center gap-x-1 md:gap-x-2">
+                        <Image className="h-8 md:h-14 lg:h-20 w-10 md:w-16 lg:w-24" src={logo} height={200} width={200} alt="logo" />
+                        <h1 className="uppercase text-lg md:text-2xl lg:text-3xl font-bold text-[#00C4CC] font-unbounded">MediCare</h1>
                     </Link>
                     <div className="hidden lg:block">
                         <ul className="flex gap-x-5 xl:gap-x-7">
@@ -93,7 +93,7 @@ const Navbar = () => {
                             <span className="absolute top-0 right-0 w-20 h-full -mr-3">
                                 <svg viewBox="0 0 487 487" className="object-cover w-full h-full" xmlns="http://www.w3.org/2000/svg"><path d="M487 486.7c-66.1-3.6-132.3-7.3-186.3-37s-95.9-85.3-126.2-137.2c-30.4-51.8-49.3-99.9-76.5-151.4C70.9 109.6 35.6 54.8.3 0H487v486.7z" fill="#FFF" fillRule="nonzero" fillOpacity=".1"></path></svg>
                             </span>
-                            <span className="relative text-sm md:text-base">My Appoinments</span>
+                            <span className="relative text-xs md:text-base">My Appoinments</span>
                         </Link>
                         <MobileNav />
                     </div>

@@ -1,10 +1,9 @@
 
 const UseGetPopularTest = async () => {
     try {
-        const response = await fetch(process.env.SERVER_URL + '/mostFrequent',
+        const response = await fetch(`${process.env.SERVER_URL}/mostFrequent`,
             {
-                next:
-                    { revalidate: 5 }
+                next: { revalidate: 5 }
             }
         );
         const res = response.json();

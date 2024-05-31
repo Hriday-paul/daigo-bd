@@ -150,3 +150,22 @@ body::-webkit-scrollbar-thumb {
     width: 40px;
   }
 }
+
+.ant-float-btn-circle{
+  border : 0;
+  height: 45px;
+  width: 45px;
+}
+
+.ant-float-btn-circle{
+  background-color: #198D8D;
+}
+.ant-float-btn-default .ant-float-btn-body {
+  background-color: #198D8D;
+}
+.ant-float-btn-circle:hover{
+  background-color: #177e7e;
+}
+.ant-float-btn-default .ant-float-btn-body .ant-float-btn-content .ant-float-btn-icon {
+  color: white;
+}
