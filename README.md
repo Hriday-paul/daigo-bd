@@ -1,5 +1,5 @@
 # Medical clinic managment system
-### live link : https://medico-serve.netlify.app
+### live link : https://daigo-bd.vercel.app
 
 ## Secret credential
 > #### Admin email : ``` admin@gmail.com ```, password : ``` @dmiN00 ``` <br>
