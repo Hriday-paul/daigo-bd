@@ -42,7 +42,7 @@ const Doctors = async () => {
                     
                     {
                         doctors?.map((doctor) => {
-                            return <CardDoctor key={doctor._id} title={doctor.title} image={doctor.photo} name={doctor.name} id={doctor._id} services={doctor.services} location={doctor.location} />
+                            return <CardDoctor key={doctor._id} title={doctor.title} image={doctor.photo} name={doctor.name} id={doctor._id} services={doctor.services} location={doctor?.location} />
                         })
                     }
                 </div>

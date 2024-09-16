@@ -25,7 +25,7 @@ const HomeSlider = () => {
     }, [nextSlider]);
 
     return (
-        <div className="h-[350px] md:h-[420px] w-full lg:h-screen relative overflow-hidden">
+        <div className="h-[350px] md:h-[420px] w-full lg:h-[550px] xl:h-[620px] relative overflow-hidden">
             {/* arrow left */}
             <button onClick={prevSlider} className="absolute bottom-7 right-14 md:right-[70px] z-20 flex justify-center items-center bg-[#198D8D] hover:bg-[#346E6E] duration-300 rounded w-6 h-6 md:w-10 md:h-10">
                 <GrFormNextLink className="text-white rotate-180 text-lg"></GrFormNextLink>

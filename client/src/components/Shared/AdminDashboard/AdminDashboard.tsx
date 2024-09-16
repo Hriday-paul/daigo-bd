@@ -19,7 +19,7 @@ import { FaListCheck, FaUserDoctor } from "react-icons/fa6";
 const AdminDashboard = ({ children }: { children: ReactNode }) => {
     const [slide, setSlide] = useState(false);
     const [showDropDown, setShowDropDown] = useState<boolean>(false);
-    const { status, data } = useSession();
+    const { data } = useSession();
     const { user: userInfo } = data || {};
     const pathname = usePathname();
 
@@ -90,28 +90,28 @@ const AdminDashboard = ({ children }: { children: ReactNode }) => {
 
                         <div className="px-2">
                             <h2 className="text-lg font-medium text-white font-serif p-5 pb-0">Main</h2>
-                            <Link href="/dashboard" className={pathname == '/dashboard' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
+                            <Link href="/admin" className={pathname == '/admin' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
                                 <LuLayoutDashboard className="text-white text-2xl mr-2"></LuLayoutDashboard>
                                 <h4 className="text-lg text-white font-serif font-medium">Dashboard</h4>
                             </Link>
 
-                            <Link href="/dashboard/addTest" className={pathname === '/dashboard/addTest' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
+                            <Link href="/admin/addTest" className={pathname === '/admin/addTest' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
                                 <MdAddTask className="text-white text-2xl mr-2"></MdAddTask>
                                 <h4 className="text-lg text-white font-serif font-medium">Add Test</h4>
                             </Link>
-                            <Link href="/dashboard/allTest" className={pathname === '/dashboard/allTest' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
+                            <Link href="/admin/allTest" className={pathname === '/admin/allTest' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
                                 <CiViewList className="text-white text-2xl mr-2"></CiViewList>
                                 <h4 className="text-lg text-white font-serif font-medium">All Test</h4>
                             </Link>
-                            <Link href="/dashboard/reservation" className={pathname === '/dashboard/reservation' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
+                            <Link href="/admin/reservation" className={pathname === '/admin/reservation' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
                                 <FaListCheck className="text-white text-xl mr-2"></FaListCheck>
                                 <h4 className="text-lg text-white font-serif font-medium">Reservation</h4>
                             </Link>
-                            <Link href="/dashboard/doctors" className={pathname === '/dashboard/doctors' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
+                            <Link href="/admin/doctors" className={pathname === '/admin/doctors' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
                                 <FaUserDoctor className="text-white text-xl mr-2"></FaUserDoctor>
                                 <h4 className="text-lg text-white font-serif font-medium">Doctors</h4>
                             </Link>
-                            <Link href="/dashboard/users" className={pathname == '/dashboard/users' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
+                            <Link href="/admin/users" className={pathname == '/admin/users' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
                                 <LuUsers2 className="text-white text-2xl mr-2"></LuUsers2>
                                 <h4 className="text-lg text-white font-serif font-medium">Users</h4>
                             </Link>
@@ -132,28 +132,28 @@ const AdminDashboard = ({ children }: { children: ReactNode }) => {
 
                     <div className="px-2">
                         <h2 className="text-lg font-medium text-white font-serif p-5 pb-0">Main</h2>
-                        <Link href="/dashboard" onClick={() => setSlide(false)} className={pathname == '/dashboard' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl"} >
+                        <Link href="/admin" onClick={() => setSlide(false)} className={pathname == '/admin' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl"} >
                             <LuLayoutDashboard className="text-white text-2xl mr-2"></LuLayoutDashboard>
                             <h4 className="text-lg text-white font-serif font-medium">Dashboard</h4>
                         </Link>
 
-                        <Link href="/dashboard/addTest" onClick={() => setSlide(false)} className={pathname === '/dashboard/addTest' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
+                        <Link href="/admin/addTest" onClick={() => setSlide(false)} className={pathname === '/admin/addTest' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
                             <MdAddTask className="text-white text-2xl mr-2"></MdAddTask>
                             <h4 className="text-lg text-white font-serif font-medium">Add Test</h4>
                         </Link>
-                        <Link href="/dashboard/allTest" onClick={() => setSlide(false)} className={pathname === '/dashboard/allTest' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
+                        <Link href="/admin/allTest" onClick={() => setSlide(false)} className={pathname === '/admin/allTest' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
                             <CiViewList className="text-white text-2xl mr-2"></CiViewList>
                             <h4 className="text-lg text-white font-serif font-medium">All Test</h4>
                         </Link>
-                        <Link href="/dashboard/reservation" onClick={() => setSlide(false)} className={pathname === '/dashboard/reservation' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
+                        <Link href="/admin/reservation" onClick={() => setSlide(false)} className={pathname === '/admin/reservation' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
                             <FaListCheck className="text-white text-xl mr-2"></FaListCheck>
                             <h4 className="text-lg text-white font-serif font-medium">Reservation</h4>
                         </Link>
-                        <Link href="/dashboard/doctors" onClick={() => setSlide(false)} className={pathname === '/dashboard/doctors' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
+                        <Link href="/admin/doctors" onClick={() => setSlide(false)} className={pathname === '/admin/doctors' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
                             <FaUserDoctor className="text-white text-xl mr-2"></FaUserDoctor>
                             <h4 className="text-lg text-white font-serif font-medium">Doctors</h4>
                         </Link>
-                        <Link href="/dashboard/users" onClick={() => setSlide(false)} className={pathname == '/dashboard/users' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
+                        <Link href="/admin/users" onClick={() => setSlide(false)} className={pathname == '/admin/users' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#302E2B] hover:bg-[#302E2B] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#302E2B] duration-100 rounded-sm"} >
                             <LuUsers2 className="text-white text-2xl mr-2"></LuUsers2>
                             <h4 className="text-lg text-white font-serif font-medium">Users
                             </h4>

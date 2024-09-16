@@ -16,9 +16,12 @@ const userSchema = Schema(
         },
         status: {
             type: String,
+            default : 'active'
         },
         photo : {
-            type : String
+            type : String,
+            required : true,
+            default : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUDOlaA7x6auc_yDvEigMgyktyrJBM34AFOaauo6-qXD5zg_vpZlZk9offXf9PMLdA0Lw&usqp=CAU'
         },
         role : {
             type : String,

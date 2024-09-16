@@ -1,10 +1,11 @@
-import type { NextAuthOptions } from "next-auth";
+
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
+import NextAuth from "next-auth";
 
-export const AuthOptions: NextAuthOptions = {
+const AuthOptions = NextAuth({
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_ID!,
@@ -26,7 +27,6 @@ export const AuthOptions: NextAuthOptions = {
             },
             async authorize(credentials) {
                 try {
-                    console.log('Im in user form login', credentials);
                     const { email, password } = credentials as any;
                     if (!email || !password) throw new Error("Please, fill all input!");
 
@@ -45,10 +45,11 @@ export const AuthOptions: NextAuthOptions = {
 
                     const result = await loginResponse.json();
                     if (result.message === 'password not match') {
-                        throw new Error(result.message);
+                        throw new Error(JSON.stringify(result.message));
                     }
 
                     return result;
+
                 } catch (err) {
                     const error = err as Error;
                     console.error(error.message);
@@ -58,9 +59,6 @@ export const AuthOptions: NextAuthOptions = {
         }),
     ],
     secret: process.env.NEXTAUTH_SECRET,
-    jwt: {
-        secret: process.env.JWT_SECRET,
-    },
     session: {
         strategy: "jwt",
     },
@@ -77,7 +75,7 @@ export const AuthOptions: NextAuthOptions = {
         },
         async signIn({ user, account }: any) {
             try {
-                console.log('Im test user sign in',user);
+
                 if (user) {
                     const { name, email, image } = user
                     //post data in server
@@ -98,7 +96,10 @@ export const AuthOptions: NextAuthOptions = {
             }
         }
     },
+    trustHost: true,
     pages: {
-        signIn: '/login',  // Specify your login page URL
+        signIn: '/login',
     },
-};
+});
+
+export const { auth, handlers, signIn, signOut } = AuthOptions;

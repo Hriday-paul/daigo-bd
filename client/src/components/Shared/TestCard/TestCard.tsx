@@ -9,10 +9,10 @@ const TestCard = ({ test }: { test: testType }) => {
         <div data-aos="fade-up" data-aos-duration="1500">
             <div className="bg-[#0C0D0B] flex flex-col rounded-lg w-full border border-gray-700 p-7">
 
-                <Link href={test._id}>
+                <Link href={`/tests/${test._id}`}>
                     <Image src={test?.photo} alt="test image" height={200} width={200} className="min-h-52 w-full h-56"></Image></Link>
                 <div className="pt-5 space-y-2 md:space-y-3 flex flex-col ">
-                    <Link href={test._id}>
+                    <Link href={`/tests/${test._id}`}>
                         <h3 className="text-gray-100 text-2xl lg:text-3xl font-sansline-clamp-1 font-unbounded font-medium hover:text-teal-500 duration-150">{test?.name}</h3>
                     </Link>
 

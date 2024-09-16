@@ -1,6 +1,11 @@
 'use client'
 
-import ChartAdmin from "@/components/Ui/ChartAdmin/ChartAdmin";
+import dynamic from 'next/dynamic';
+
+const ChartAdmin = dynamic(() => import('@/components/Ui/ChartAdmin/ChartAdmin'), { 
+    ssr: false 
+});
+
 import ClientError from "@/components/Ui/ClientError/ClientError";
 import ClientLoading from "@/components/Ui/ClientLoading/ClientLoading";
 import { useAdminDashboardDataQuery } from "@/lib/features/Api/Api";
@@ -16,7 +21,7 @@ const AdminHome = () => {
     const [prevDays, setPrevDays] = useState<number>(7);
     const { isLoading, isError, data: dashboardata, } = useAdminDashboardDataQuery({ email: data?.user?.email || '', prevdays: prevDays });
 
-    const changePrevDays = (e : React.ChangeEvent<HTMLSelectElement>) => {
+    const changePrevDays = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setPrevDays(parseInt(e.target.value));
     }
 
@@ -54,9 +59,7 @@ const AdminHome = () => {
                                         <MdOutlineFiberSmartRecord className='text-lg text-gray-200'></MdOutlineFiberSmartRecord>
                                         <div className='flex flex-row gap-x-2 items-center'>
                                             <h4 className='text-2xl font-bold text-gray-200'>
-                                                {
-                                                    <CountUp delay={1} duration={6} end={dashboardata?.totalTest || 0} enableScrollSpy={true} scrollSpyOnce={true} />
-                                                }
+                                                <CountUp delay={1} duration={6} end={dashboardata?.totalTest || 0} enableScrollSpy={true} scrollSpyOnce={true} />
                                             </h4>
                                         </div>
                                     </div>
@@ -71,9 +74,7 @@ const AdminHome = () => {
                                     <h3 className='text-lg text-slate-200 font-medium'>Total Booked</h3>
                                     <div className='flex flex-row gap-x-2 items-center'>
                                         <h4 className='text-2xl font-bold text-gray-200'>
-                                            {
-                                                <CountUp delay={1} duration={6} end={dashboardata?.totalAppoinments || 0} enableScrollSpy={true} scrollSpyOnce={true} />
-                                            }
+                                            <CountUp delay={1} duration={6} end={dashboardata?.totalAppoinments || 0} enableScrollSpy={true} scrollSpyOnce={true} />
                                         </h4>
                                     </div>
                                 </div>

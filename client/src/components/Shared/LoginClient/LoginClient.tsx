@@ -16,17 +16,17 @@ const LoginClient = () => {
     const session = useSession();
     const router = useRouter();
     const [formLoading, setFormLoading] = useState<boolean>(false);
-    const { status } = session
-    
-    useEffect(() => {
-        if (status === "unauthenticated") {
-            console.log("No JWT");
-            console.log(status);
+    const { status } = session;
 
-        } else if (status === "authenticated") {
-            router.push('/dashboard')
-        }
-    }, [status, router]);
+    // useEffect(() => {
+    //     if (status === "unauthenticated") {
+    //         console.log("No JWT");
+    //         console.log(status);
+
+    //     } else if (status === "authenticated") {
+    //         router.push('/dashboard')
+    //     }
+    // }, [status, router]);
 
     const {
         register,
@@ -36,16 +36,18 @@ const LoginClient = () => {
 
     const handleRegister: SubmitHandler<Inputs> = (data) => {
         setFormLoading(true)
-        signIn("credentials", { email: data.email, password: data.password, redirect: false }).then(async ({ ok, error }: any) => {
-            console.log(ok);
-            if (ok && !error) {
-                router.push('/dashboard')
-                //location.reload();
-            } else if (!ok && error) {
-                toast.error(error);
-            }
-            setFormLoading(false);
-        })
+
+        signIn("credentials", { email: data.email, password: data.password, redirect: false })
+            .then(async ({ ok, error }: any) => {
+                console.log(error, ok)
+                if (error === null) {
+                    router.push("/dashboard");
+                }
+                if (error) {
+                    toast.error("Check Your Email Or Password");
+                }
+                setFormLoading(false);
+            })
     }
 
     return (

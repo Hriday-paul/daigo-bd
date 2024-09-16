@@ -23,8 +23,6 @@ const UserDashboard = ({ children }: { children: ReactNode }) => {
     const [slide, setSlide] = useState(false);
     const [showDropDown, setShowDropDown] = useState(false);
 
-    console.log(userInfo);
-
     return (
         <div>
             <nav className="bg-gradient-to-r from-[#181716] to-[#070806] px-4">
@@ -126,7 +124,7 @@ const UserDashboard = ({ children }: { children: ReactNode }) => {
 
                     <div className="px-2">
                         <h2 className="text-lg font-medium text-white font-serif p-5 pb-0">Main</h2>
-                        <Link href="/dashboard" onClick={() => setSlide(false)} className={location.pathname == '/dashboard' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#131412] hover:bg-[#131412] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#131412] duration-100 rounded-sm"} >
+                        <Link href="/dashboard" onClick={() => setSlide(false)} className={pathname == '/dashboard' ? "w-full text-white my-5 flex flex-row justify-start items-center p-3 bg-[#131412] hover:bg-[#131412] duration-100 rounded-sm shadow-xl" : "w-full my-5 flex flex-row items-center justify-start p-3 bg-transparent hover:bg-[#131412] duration-100 rounded-sm"} >
                             <LuLayoutDashboard className="text-white text-2xl mr-2"></LuLayoutDashboard>
                             <h4 className="text-lg text-white font-serif font-medium">Dashboard</h4>
                         </Link>

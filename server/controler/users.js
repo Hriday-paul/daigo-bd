@@ -1,4 +1,5 @@
 const userStore = require('../model/users')
+const bcrypt = require('bcrypt')
 
 const checkIsAdmin = async (req, res) => {
     try {
@@ -16,19 +17,26 @@ const checkIsAdmin = async (req, res) => {
 // add  user
 const creatNewUser = async (req, res) => {
     try {
-        const filter = { email: req.body.email };
+        const {name, email, password} = req.body;
+
+        const filter = { email };
         const user = await userStore.findOne(filter);
         if (user) {
             return res.status(400).send({ msg: 'user alreadt exist !' });
         }
-        const result = await userStore.collection.insertOne(req.body);
+        
+        // generate hashed password
+        const hashPassword = await bcrypt.hash(password, 12);
+
+        const result = await userStore.collection.insertOne({name, email, password : hashPassword, status : 'active'});
+
         res.status(200).send(result)
     } catch (err) {
         res.status(400).send({ message: err.message })
     }
 };
 
-// add or update user
+// add or update user by google sign in
 const addOrUpdateUser = async (req, res) => {
     try {
         const filter = { email: req.body.email }
@@ -36,7 +44,7 @@ const addOrUpdateUser = async (req, res) => {
         if (user) {
             return res.status(200).send({ messge: 'login successfully' });
         }
-        const result = await userStore.collection.insertOne(req.body);
+        await userStore.collection.insertOne(req.body);
         res.status(200).send({ messge: 'login successfully' });
     } catch (err) {
         res.status(400).send({ message: err.message })
@@ -47,10 +55,15 @@ const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await userStore.findOne({ email });
+        
         if (user) {
-            if (user.password !== password) {
+
+            const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+            if (!isPasswordMatch) {
                 return res.status(400).send({ message: 'password not match' })
             }
+
             const {name, email, status, photo, role, _id} = user;
             return res.status(200).send({name, email, status, image : photo, role, _id});
         }
