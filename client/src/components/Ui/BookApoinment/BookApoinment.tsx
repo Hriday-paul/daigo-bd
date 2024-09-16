@@ -1,20 +1,13 @@
 'use client'
-
 import { Modal } from "antd";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import AppoinmentForm from "./AppoinmentForm";
 
 const BookApoinment = ({testId} : {testId : string}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const router = useRouter();
 
     const openModal = () => {
-        if (true) {
-            setIsModalOpen(true)
-        } else {
-            router.push('/login')
-        }
+        setIsModalOpen(true)
     }
 
     return (

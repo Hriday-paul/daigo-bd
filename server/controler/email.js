@@ -15,8 +15,8 @@ const sendMail = async (req, res) => {
     try {
         // send mail with defined transport object
         const info = await transporter.sendMail({
-            from: process.env.SMTP_USER, // sender address
-            to: email, // list of receivers
+            from: email, // sender address
+            to: process.env.SMTP_USER, // list of receivers
             subject: subject, // Subject line
             text: "email", // plain text body
             html: `<div style="padding: 40px; background-color: rgb(240, 240, 240);">

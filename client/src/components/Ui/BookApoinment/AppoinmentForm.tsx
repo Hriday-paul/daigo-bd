@@ -1,7 +1,10 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form"
 import toast from "react-hot-toast";
+import { handleBookAppoinment } from "./Action";
+import { ImSpinner2 } from "react-icons/im";
 
 type Inputs = {
     name: string;
@@ -13,6 +16,7 @@ type Inputs = {
 const AppoinmentForm = ({ testId }: { testId: string }) => {
     const { status, data } = useSession();
     const router = useRouter();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const {
         register,
@@ -22,32 +26,31 @@ const AppoinmentForm = ({ testId }: { testId: string }) => {
     } = useForm<Inputs>();
 
     const handleCreat: SubmitHandler<Inputs> = async (formData) => {
-        const loadingToastId = toast.loading('Test Booking pending...');
+
         try {
-            if(status == 'unauthenticated'){
+            if (status == 'unauthenticated') {
                 router.push('/login');
             }
             const date = `${new Date().getFullYear()}-${(new Date().getMonth() + 1)}-${new Date().getDate()}`;
-            const output: any = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/addReservation`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ ...formData, bookedDate: date, testId, email: data?.user?.email }),
-            });
-            const response = await output.json();
-            
+            setIsLoading(true);
+            const response : any = await handleBookAppoinment({ ...formData, bookedDate: date, testId, email: data?.user?.email });
+
+            console.log(response)
+
             if (response?.upsertedCount >= 1) {
-                toast.success('Test Booked Complete', { id: loadingToastId });
+                toast.success('Test Booked Complete');
             }
             else {
-                toast.error("You already booked, don't try !", { id: loadingToastId })
+                toast.error("You already booked, don't try !")
             }
             reset();
         }
         catch (err) {
             console.log(err);
-            toast.error("Error found !", { id: loadingToastId })
+            toast.error("Error found !")
+        }
+        finally{
+            setIsLoading(false)
         }
     };
 
@@ -90,9 +93,9 @@ const AppoinmentForm = ({ testId }: { testId: string }) => {
 
 
                 <div className="col-span-1 md:col-span-2 my-2">
-                    <button type="submit" className="btn btn-info w-full bg-blue-500 text-white hover:bg-blue-600">
+                    <button type="submit" disabled={isLoading} className="btn btn-info w-full bg-blue-500 text-white hover:bg-blue-600 flex justify-center items-center gap-x-1 disabled:cursor-not-allowed disabled:opacity-80">
+                        {isLoading && <ImSpinner2 className="text-lg text-white animate-spin"/>}
                         Book Now
-
                     </button>
                 </div>
             </form>
