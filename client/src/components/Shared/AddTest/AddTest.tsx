@@ -65,14 +65,15 @@ const AddTest = () => {
                         <div>
                             <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-300">Price<span className="text-red-500">*</span></label>
 
-                            <input id='price' type="number" className={`rounded-md px-2 outline-none py-1 bg-[#302E2B] text-gray-300 shadow-inner h-10 w-full text-sm ${errors.price ? 'border border-red-500' : 'border-0'}`} {...register("price", { required: true })} />
-                            {errors.price && <p className="text-red-500 text-sm">Price is required</p>}
+                            <input id='price' type="number" className={`rounded-md px-2 outline-none py-1 bg-[#302E2B] text-gray-300 shadow-inner h-10 w-full text-sm ${errors.price ? 'border border-red-500' : 'border-0'}`} {...register("price", { required: true, pattern : {value : /^[1-9]+$/, message : 'use positive number'},  min : {value : 100, message : 'use minimum price 100'}, max : {value : 50000, message : 'use max price 50000'}})} />
+                            {errors.price && <p className="text-red-500 text-sm">{errors?.price?.message}</p>}
                         </div>
                         <div>
                             <label htmlFor="slot" className="block mb-2 text-sm font-medium text-gray-300">Total Slot<span className="text-red-500">*</span></label>
 
-                            <input id='slot' type="number" className={`rounded-md px-2 outline-none py-1 bg-[#302E2B] text-gray-300 shadow-inner h-10 w-full text-sm ${errors.slot ? 'border border-red-500' : 'border-0'}`} {...register("slot", { required: true })} />
-                            {errors.slot && <p className="text-red-500 text-sm">Slot is required</p>}
+                            <input id='slot' type="number" className={`rounded-md px-2 outline-none py-1 bg-[#302E2B] text-gray-300 shadow-inner h-10 w-full text-sm ${errors.slot ? 'border border-red-500' : 'border-0'}`} {...register("slot", { required: true, pattern : {value : /^[1-9]+$/, message : 'use positive number'},  min : {value : 1, message : 'use minimum slot 1'}, max : {value : 500, message : 'use max slot 500'}})} />
+
+                            {errors.slot && <p className="text-red-500 text-sm">{errors?.slot?.message}</p>}
                         </div>
                         <div>
                             <label htmlFor="testDate" className="block mb-2 text-sm font-medium text-gray-300">Test Date<span className="text-red-500">*</span></label>
@@ -83,8 +84,8 @@ const AddTest = () => {
                         <div>
                             <label htmlFor="testDetails" className="block mb-2 text-sm font-medium text-gray-300">Test Details<span className="text-red-500">*</span></label>
 
-                            <textarea id='testDetails' rows={5} className={`rounded-md px-2 outline-none py-1 bg-[#302E2B] text-gray-300 shadow-inner w-full text-sm ${errors.details ? 'border border-red-500' : 'border-0'}`}  {...register("details", { required: true })} />
-                            {errors.details && <p className="text-red-500 text-sm">Details is required</p>}
+                            <textarea id='testDetails' rows={5} className={`rounded-md px-2 outline-none py-1 bg-[#302E2B] text-gray-300 shadow-inner w-full text-sm ${errors.details ? 'border border-red-500' : 'border-0'}`}  {...register("details", { required: {value : true, message : 'Details is required'}, minLength : {value : 20, message : 'use minimum 20 character'}})} />
+                            {errors.details && <p className="text-red-500 text-sm">{errors?.details?.message}</p>}
                         </div>
 
                         <div>

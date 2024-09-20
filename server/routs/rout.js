@@ -1,11 +1,13 @@
 const express = require("express");
 const { addOrUpdateReservation, getReservations, updateResurvation, getTestByUser, deleteAppoinment, mostSellResurvation, getUserDashBoardCount } = require("../controler/reservations");
-const { checkIsAdmin, addOrUpdateUser, allUsers, creatNewUser, loginUser } = require("../controler/users");
+const { checkIsAdmin, allUsers, creatNewUser, loginUser, addOrUpdateUserBySocialLogin } = require("../controler/users");
 const { addNewTest, allTests, updateTest, testDetails, deleteTest } = require("../controler/tests");
 const { getAdminDash, verifyAdmin } = require("../controler/admin");
 const { prevDateList } = require("../controler/prevDate");
 const { addDoctor, getAllDoctorrs, getActiveDoctors, doctorDetails } = require("../controler/doctor");
 const { sendMail } = require("../controler/email");
+const { userRegisterValidator, userLoginValidator, userAddOrUpdateValidatorBySocial } = require("../helper/validator");
+const RateLimit = require("../helper/RateLimiter");
 const router = express.Router();
 
 // add reservation
@@ -14,12 +16,15 @@ router.put("/addReservation", addOrUpdateReservation);
 // chech is admin
 router.get("/isAdmin/:email", checkIsAdmin);
 
+
+const Creat_LoginRateLimit = RateLimit({windowMs : 1 * 1000 * 60, max : 5});
 // add or update user
-router.put('/user', addOrUpdateUser);
+router.put('/user', Creat_LoginRateLimit, userAddOrUpdateValidatorBySocial, addOrUpdateUserBySocialLogin);
 
-router.post('/user', creatNewUser);
+router.post('/user', Creat_LoginRateLimit, userRegisterValidator, creatNewUser);
 
-router.post('/login', loginUser);
+
+router.post('/login', Creat_LoginRateLimit, loginUser);
 
 // get all users
 router.get('/users', verifyAdmin, allUsers);

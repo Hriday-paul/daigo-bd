@@ -33,9 +33,8 @@ const AppoinmentForm = ({ testId }: { testId: string }) => {
             }
             const date = `${new Date().getFullYear()}-${(new Date().getMonth() + 1)}-${new Date().getDate()}`;
             setIsLoading(true);
+            
             const response : any = await handleBookAppoinment({ ...formData, bookedDate: date, testId, email: data?.user?.email });
-
-            console.log(response)
 
             if (response?.upsertedCount >= 1) {
                 toast.success('Test Booked Complete');
@@ -65,14 +64,14 @@ const AppoinmentForm = ({ testId }: { testId: string }) => {
                 </div>
                 <div>
                     <label htmlFor="age" className="block mb-1 text-sm font-medium text-gray-400">patient Age <span className="text-red-500">*</span></label>
-                    <input id="age" type="number" placeholder="age..." className={`w-full py-2 px-3 rounded-lg bg-gray-800 text-gray-300 border outline-0 ${errors.age ? ' border-red-500' : ' border-gray-600 focus:border-blue-500'}`}  {...register("age", { required: true })} />
-                    {errors.age && <p className="text-red-500 text-sm">Age is required</p>}
+                    <input id="age" type="number" placeholder="age..." className={`w-full py-2 px-3 rounded-lg bg-gray-800 text-gray-300 border outline-0 ${errors.age ? ' border-red-500' : ' border-gray-600 focus:border-blue-500'}`}  {...register("age", { required: {value : true, message : 'Age is required'}, pattern : {value : /^(0|[1-9]\d*)(\.\d+)?$/, message : 'invalid age'}, min : {value : 10, message : 'min age is 10'}, max : {value : 70, message : 'max age is 70'} })} />
+                    {errors.age && <p className="text-red-500 text-sm">{errors?.age?.message}</p>}
                 </div>
 
                 <div>
                     <label htmlFor="phone" className="block mb-1 text-sm font-medium text-gray-400">Contact number  <span className="text-red-500">*</span></label>
-                    <input id="phone" type="number" placeholder="phone..." className={`w-full py-2 px-3 rounded-lg bg-gray-800 text-gray-300 border outline-0 ${errors.phone ? ' border-red-500' : ' border-gray-600 focus:border-blue-500'}`}  {...register("phone", { required: true })} />
-                    {errors.phone && <p className="text-red-500 text-sm">Phone is required</p>}
+                    <input id="phone" type="number" placeholder="phone..." className={`w-full py-2 px-3 rounded-lg bg-gray-800 text-gray-300 border outline-0 ${errors.phone ? ' border-red-500' : ' border-gray-600 focus:border-blue-500'}`}  {...register("phone", { required: {value : true, message : 'phone number required'}, pattern : {value : /^(\+?88)?01\d{9}$/, message : 'invalid phone number'} })} />
+                    {errors.phone && <p className="text-red-500 text-sm">{errors?.phone?.message}</p>}
                 </div>
 
                 <div>

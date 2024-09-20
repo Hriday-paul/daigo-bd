@@ -38,27 +38,25 @@ const Registration = () => {
     } = useForm<Inputs>();
 
     const handleRegister: SubmitHandler<Inputs> = (data) => {
-        creatUser({
-            ...data,
-            photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUDOlaA7x6auc_yDvEigMgyktyrJBM34AFOaauo6-qXD5zg_vpZlZk9offXf9PMLdA0Lw&usqp=CAU',
-            status: 'active'
-        });
+        creatUser(data);
     };
 
-    if (isError) {
-        const errdata = error as { status: number | string; error?: string, data?: { msg: string } }
-        if (errdata.status == 'FETCH_ERROR') {
-            toast.error('Check your internet connection')
+    useEffect(()=>{
+        if (isError) {
+            const errdata = error as { status: number | string; error?: string, data?: { message: string } }
+            if (errdata.status == 'FETCH_ERROR') {
+                toast.error('Check your internet connection')
+            }
+            else if (errdata.status == 400) {
+                toast.error(errdata?.data?.message || 'Check your internet connection')
+            }
+            else toast.error('Something wrong, try again!')
+        };
+    
+        if (isSuccess) {
+            router.push('/login')
         }
-        else if (errdata.status == 400) {
-            toast.error(errdata?.data?.msg || 'Check your internet connection')
-        }
-        else toast.error('Something wrong, try again!')
-    };
-
-    if (isSuccess) {
-        router.push('/login')
-    }
+    },[error, isError, isSuccess, router])
 
 
     return (
@@ -84,12 +82,15 @@ const Registration = () => {
 
                         </div>
                         <span>or use your email for registration</span>
-                        <input type="text" id="name" placeholder="Name" {...register("name", { required: true })} />
+                        <input type="text" id="name" placeholder="Name" {...register("name", { required: {value : true, message : 'name is required'} })} />
                         {errors.name && <p className="text-red-500 text-xs text-left">Name is required</p>}
-                        <input type="email" placeholder="Email" {...register("email", { required: true })} />
-                        {errors.email && <p className="text-red-500 text-xs text-left">Email is required</p>}
-                        <input type="password" placeholder="Password" {...register("password", { required: true, pattern: /(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/, minLength: 6 })} />
-                        {errors.password && <p className="text-red-500 text-xs text-left">use minimum 1 capital, 1 number and 1 special character & 6 length</p>}
+
+                        <input type="email" placeholder="Email" {...register("email", { required: {value : true, message : 'email is required'}, pattern: {value : /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, message : 'invalid email address'} })} />
+                        {errors.email && <p className="text-red-500 text-xs text-left">{errors?.email?.message}</p>}
+
+                        <input type="password" placeholder="Password" {...register("password", { required: {value : true, message : 'Password is required'}, pattern: {value : /(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/, message : 'use minimum 1 capital, 1 number and 1 special character & 6 length'}, minLength: {value : 6, message : 'min length 6'} })} />
+                        {errors.password && <p className="text-red-500 text-xs text-left">{errors?.password?.message}</p>}
+
                         <button className="mt-5">Sign Up</button>
                     </form>
                 </div>

@@ -12,7 +12,6 @@ const addNewTest = async (req, res) => {
 
 const allTests = async (req, res) => {
     try {
-        console.log("test called");
         let result = [];
         if (req.query.type == 'valid') {
             result = await testStore.find({ testDate: { $gte: Date.now() } });

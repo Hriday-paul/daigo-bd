@@ -18,15 +18,15 @@ const LoginClient = () => {
     const [formLoading, setFormLoading] = useState<boolean>(false);
     const { status } = session;
 
-    // useEffect(() => {
-    //     if (status === "unauthenticated") {
-    //         console.log("No JWT");
-    //         console.log(status);
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            console.log("No JWT");
+            console.log(status);
 
-    //     } else if (status === "authenticated") {
-    //         router.push('/dashboard')
-    //     }
-    // }, [status, router]);
+        } else if (status === "authenticated") {
+            router.push('/dashboard')
+        }
+    }, [status, router]);
 
     const {
         register,
@@ -73,8 +73,13 @@ const LoginClient = () => {
                     </div>
                     <form onSubmit={handleSubmit(handleRegister)}>
                         <span>or use your email for login</span>
-                        <input type="email" placeholder="Email" {...register("email", { required: true })} />
-                        <input type="password" placeholder="Password" {...register("password", { required: true })} />
+
+                        <input type="email" placeholder="Email" {...register("email", { required: { value: true, message: 'email is required' }, pattern: { value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, message: 'invalid email address' } })} />
+                        {errors.email && <p className="text-red-500 text-xs text-left">{errors?.email?.message}</p>}
+
+                        <input type="password" placeholder="Password" {...register("password", { required: { value: true, message: 'Password is required' }, pattern: { value: /(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/, message: 'use minimum 1 capital, 1 number and 1 special character & 6 length' }, minLength: { value: 6, message: 'min length 6' } })} />
+                        {errors.password && <p className="text-red-500 text-xs text-left">{errors?.password?.message}</p>}
+
                         <button className="mt-5">Sign In</button>
                     </form>
                 </div>

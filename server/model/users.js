@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const userSchema = Schema(
+const userSchema = new Schema(
     {
         name: {
             type: String,
@@ -22,6 +22,12 @@ const userSchema = Schema(
             type : String,
             required : true,
             default : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUDOlaA7x6auc_yDvEigMgyktyrJBM34AFOaauo6-qXD5zg_vpZlZk9offXf9PMLdA0Lw&usqp=CAU'
+        },
+        provider : {
+            type : String,
+            required : true,
+            enum : ['credential', 'social'],
+            default : 'credential'
         },
         role : {
             type : String,

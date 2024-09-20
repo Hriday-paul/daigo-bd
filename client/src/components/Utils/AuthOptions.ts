@@ -63,15 +63,16 @@ const AuthOptions = NextAuth({
         strategy: "jwt",
     },
     callbacks: {
-        async session({ session, token }: any) {
-            session.user = token.user;
-            return session;
-        },
         async jwt({ token, user }) {
             if (user) {
                 token.user = user;
             }
             return token;
+        },
+        async session({ session, token }: any) {
+            
+            session.user = token.user;
+            return session;
         },
         async signIn({ user, account }: any) {
             try {
@@ -84,9 +85,9 @@ const AuthOptions = NextAuth({
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ email, name, password: '', status: 'active', photo: image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUDOlaA7x6auc_yDvEigMgyktyrJBM34AFOaauo6-qXD5zg_vpZlZk9offXf9PMLdA0Lw&usqp=CAU" })
+                        body: JSON.stringify({ email, name, photo : image})
                     });
-                    const result = await loginResponse.json()
+                    const result = await loginResponse.json();
                     console.log("login res", result);
                     return user
                 }
