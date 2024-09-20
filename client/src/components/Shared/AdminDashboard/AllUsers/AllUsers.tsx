@@ -48,7 +48,7 @@ const AllUsers = () => {
                                                     <div className="avatar">
                                                         <div className="rounded-full w-12 h-12">
                                                             
-                                                            <Image height={200} width={200} className="h-12 w-auto rounded-full" src={user.photo !== '' ? `${user.photo}` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUDOlaA7x6auc_yDvEigMgyktyrJBM34AFOaauo6-qXD5zg_vpZlZk9offXf9PMLdA0Lw&usqp=CAU"} alt="img" />
+                                                            <Image height={200} width={200} className="h-12 w-auto rounded-full" src={user?.photo !== '' ? `${user?.photo}` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUDOlaA7x6auc_yDvEigMgyktyrJBM34AFOaauo6-qXD5zg_vpZlZk9offXf9PMLdA0Lw&usqp=CAU"} alt="img" />
                                                         </div>
                                                     </div>
                                                 </div>

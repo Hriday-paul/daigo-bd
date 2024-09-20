@@ -93,7 +93,14 @@ const baseApi = createApi({
         adminDashboardData : builder.query<adminDashboardType, { prevdays: number, email : string }>({
             query: ({ prevdays, email }) => `/adminDash/${prevdays}?email=${email}`,
         }),
-        allUsers : builder.query<userType[], { email : string }>({
+        allUsers : builder.query<{
+            _id : string;
+            name: string;
+            email: string;
+            password: string;
+            photo : string;
+        status : 'active' | 'disable',
+    }[], { email : string }>({
             query: ({ email }) => `/users?email=${email}`,
         }),
         getAllTests : builder.query<testType[], { email : string }>({
